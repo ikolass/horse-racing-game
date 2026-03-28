@@ -36,12 +36,11 @@ Animasyonlu yarışlar, Vuex state yönetimi ve bileşen tabanlı Vue 3 mimarisi
 
 - [x] Race outcome is influenced by each horse's condition score / Yarış sonucu atların kondisyon puanından etkilenir *(Validated in Phase 1: Foundation — computeFinishOrder 94%+ win rate for high-condition horses)*
 - [x] Vuex manages all game state (horses, schedule, current round, results) / Vuex tüm oyun durumunu yönetir *(Validated in Phase 1: Foundation — 4-module store with gamePhase FSM, build 0 errors)*
+- [x] Player can view the full 20-horse roster with names, colors, and condition scores / Oyuncu 20 atlı kadroyu isim, renk ve kondisyon puanıyla görebilir *(Validated in Phase 2: Roster + Controls UI — HorseRoster + HorseRow components, browser-verified)*
+- [x] Player can click Generate to create a 6-round race schedule (10 random horses per round) / Oyuncu Generate butonuyla 6 turluk yarış programı oluşturabilir *(Validated in Phase 2: Roster + Controls UI — GameControls dispatches schedule/generateSchedule, gamePhase FSM confirmed)*
+- [x] Player can click Start to begin running races one round at a time / Oyuncu Start butonuyla yarışları tur tur başlatabilir *(Validated in Phase 2: Roster + Controls UI — Start button transitions gamePhase SCHEDULED→RACING, browser-verified)*
 
 ### Active / Aktif
-
-- [ ] Player can view the full 20-horse roster with names, colors, and condition scores / Oyuncu 20 atlı kadroyu isim, renk ve kondisyon puanıyla görebilir
-- [ ] Player can click Generate to create a 6-round race schedule (10 random horses per round) / Oyuncu Generate butonuyla 6 turluk yarış programı oluşturabilir (her turda 10 rastgele at)
-- [ ] Player can click Start to begin running races one round at a time / Oyuncu Start butonuyla yarışları tur tur başlatabilir
 - [ ] Horses animate visually across the track during each round / Her turda atlar pist üzerinde görsel animasyonla hareket eder
 - [ ] Race results display sequentially in a Results panel as each round completes / Her tur tamamlandığında yarış sonuçları Sonuçlar panelinde sıralı görüntülenir
 - [ ] Race outcome is influenced by each horse's condition score / Yarış sonucu atların kondisyon puanından etkilenir
@@ -101,4 +100,4 @@ Bu belge faz geçişlerinde ve milestone sınırlarında güncellenir.
 4. Update Context with current state / Bağlamı mevcut durumla güncelle
 
 ---
-*Last updated / Son güncelleme: 2026-03-28 — Phase 1 (Foundation) complete / Faz 1 tamamlandı*
+*Last updated / Son güncelleme: 2026-03-28 — Phase 2 (Roster + Controls UI) complete / Faz 2 tamamlandı*
