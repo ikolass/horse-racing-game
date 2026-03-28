@@ -34,7 +34,8 @@ Animasyonlu yarışlar, Vuex state yönetimi ve bileşen tabanlı Vue 3 mimarisi
 
 <!-- Shipped and confirmed valuable. / Gönderildi ve değeri onaylandı. -->
 
-(None yet — ship to validate / Henüz yok — göndererek doğrula)
+- [x] Race outcome is influenced by each horse's condition score / Yarış sonucu atların kondisyon puanından etkilenir *(Validated in Phase 1: Foundation — computeFinishOrder 94%+ win rate for high-condition horses)*
+- [x] Vuex manages all game state (horses, schedule, current round, results) / Vuex tüm oyun durumunu yönetir *(Validated in Phase 1: Foundation — 4-module store with gamePhase FSM, build 0 errors)*
 
 ### Active / Aktif
 
@@ -100,4 +101,4 @@ Bu belge faz geçişlerinde ve milestone sınırlarında güncellenir.
 4. Update Context with current state / Bağlamı mevcut durumla güncelle
 
 ---
-*Last updated / Son güncelleme: 2026-03-28 — Milestone v1.0 started / başlatıldı*
+*Last updated / Son güncelleme: 2026-03-28 — Phase 1 (Foundation) complete / Faz 1 tamamlandı*
