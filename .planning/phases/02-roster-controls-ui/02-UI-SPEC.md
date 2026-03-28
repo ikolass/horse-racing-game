@@ -143,10 +143,12 @@ Components to create in Phase 2:
 - Color swatch: 12px × 12px square, `border-radius: 2px`, background = `horse.color`
 - Layout per row: `display: flex; align-items: center; gap: 8px; padding: 4px 16px;`
 - Row order: `[swatch] [name] [badge]` — swatch left, name flex-grows, badge right-aligned
-- Condition score badge: pill shape (`border-radius: 4px`), 12px semibold text, background `#0f3460`, text `#e0e0e0`, padding `2px 6px`
+- Condition score badge: pill shape (`border-radius: 4px`), 12px semibold text, background `#0f3460`, text `#e0e0e0`, padding `4px 8px`
 - No hover state required in Phase 2 (rows are display-only, not interactive)
 
 ### GameControls (SCHED-01, SCHED-04, RACE-01, RACE-04)
+
+Primary visual anchor: Generate/Start button group (accent color `#e94560`, full-width, top of roster column).
 
 Controls placement: above the roster list, inside the roster column. Order: Generate button first, Start button second.
 
