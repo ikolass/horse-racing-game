@@ -123,13 +123,13 @@ Plans:
 **Execution Order / Yürütme Sırası:**
 Phases execute in numeric order: 1 → 2 → 3 → 4 → 5
 
-| Phase | Plans Complete | Status | Completed |
-|-------|----------------|--------|-----------|
-| 1. Foundation | 0/2 | Planning complete | - |
-| 2. Roster + Controls UI | 0/TBD | Not started | - |
-| 3. Animated Race Track | 0/TBD | Not started | - |
-| 4. Results Panel | 0/TBD | Not started | - |
-| 5. Tests | 0/TBD | Not started | - |
+| Phase                   | Plans Complete | Status            | Completed |
+|-------------------------|----------------|-------------------|-----------|
+| 1. Foundation           | 0/2            | Planning complete | -         |
+| 2. Roster + Controls UI | 0/TBD          | Not started       | -         |
+| 3. Animated Race Track  | 0/TBD          | Not started       | -         |
+| 4. Results Panel        | 0/TBD          | Not started       | -         |
+| 5. Tests                | 0/TBD          | Not started       | -         |
 
 ---
 
