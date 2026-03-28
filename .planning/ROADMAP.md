@@ -43,7 +43,7 @@ Proje, tarayıcı tabanlı eksiksiz oynanabilir at yarışı oyununu beş fazda 
 **Plans:** 2 plans
 Plans:
 - [x] 01-01-PLAN.md — GAME_CONFIG constants + shuffle and raceEngine utilities
-- [ ] 01-02-PLAN.md — Vuex store with 4 modules (horses, schedule, race, results) + main.js registration
+- [x] 01-02-PLAN.md — Vuex store with 4 modules (horses, schedule, race, results) + main.js registration
 
 ### Phase 2: Roster + Controls UI
 **Goal**: The player can see all 20 horses with names, color swatches, and condition score badges in a roster panel, and the Generate and Start buttons are rendered and correctly gated by `gamePhase` — so the state machine is proven to work before animation complexity is introduced.

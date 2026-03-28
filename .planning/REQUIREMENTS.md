@@ -9,8 +9,8 @@
 
 ### Roster / At Kadrosu
 
-- [ ] **ROST-01**: Player can view all 20 horses with name, unique color, and condition score (1–100) / Oyuncu 20 atın tamamını isim, benzersiz renk ve kondisyon puanıyla görebilir
-- [ ] **ROST-02**: Each horse is displayed with a distinct color swatch in the roster panel / Her at kadro panelinde benzersiz renk göstergesiyle listelenir
+- [x] **ROST-01**: Player can view all 20 horses with name, unique color, and condition score (1–100) / Oyuncu 20 atın tamamını isim, benzersiz renk ve kondisyon puanıyla görebilir
+- [x] **ROST-02**: Each horse is displayed with a distinct color swatch in the roster panel / Her at kadro panelinde benzersiz renk göstergesiyle listelenir
 - [ ] **ROST-03**: Horse condition score badge is visible on the race track during each round / Kondisyon puanı rozeti her turda pist üzerinde görünür
 
 ### Schedule / Yarış Programı
@@ -41,9 +41,9 @@
 
 ### State Management / Durum Yönetimi
 
-- [ ] **STATE-01**: Vuex manages all game state (horses, schedule, current round, race positions, results) / Vuex tüm oyun durumunu yönetir (atlar, program, mevcut tur, konum, sonuçlar)
-- [ ] **STATE-02**: All race simulation logic lives in Vuex actions, not in components / Tüm yarış simülasyon mantığı Vuex aksiyonlarında, bileşenlerde değil
-- [ ] **STATE-03**: A gamePhase state machine (IDLE → SCHEDULED → RACING → ROUND_COMPLETE → DONE) controls all UI gates / gamePhase durum makinesi tüm UI geçişlerini (buton durumları, panel görünürlüğü) yönetir
+- [x] **STATE-01**: Vuex manages all game state (horses, schedule, current round, race positions, results) / Vuex tüm oyun durumunu yönetir (atlar, program, mevcut tur, konum, sonuçlar)
+- [x] **STATE-02**: All race simulation logic lives in Vuex actions, not in components / Tüm yarış simülasyon mantığı Vuex aksiyonlarında, bileşenlerde değil
+- [x] **STATE-03**: A gamePhase state machine (IDLE → SCHEDULED → RACING → ROUND_COMPLETE → DONE) controls all UI gates / gamePhase durum makinesi tüm UI geçişlerini (buton durumları, panel görünürlüğü) yönetir
 
 ### Tests / Testler
 
@@ -79,11 +79,11 @@
 
 | Requirement / Gereksinim | Phase / Faz | Status / Durum |
 |-------------|-------|--------|
-| STATE-01 | Phase 1 | Pending |
-| STATE-02 | Phase 1 | Pending |
-| STATE-03 | Phase 1 | Pending |
-| ROST-01 | Phase 1 | Pending |
-| ROST-02 | Phase 1 | Pending |
+| STATE-01 | Phase 1 | Complete |
+| STATE-02 | Phase 1 | Complete |
+| STATE-03 | Phase 1 | Complete |
+| ROST-01 | Phase 1 | Complete |
+| ROST-02 | Phase 1 | Complete |
 | RACE-02 | Phase 1 | Complete |
 | SCHED-01 | Phase 2 | Pending |
 | SCHED-02 | Phase 2 | Pending |
