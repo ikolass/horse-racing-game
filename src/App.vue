@@ -1,47 +1,41 @@
 <script setup>
-import HelloWorld from './components/HelloWorld.vue'
-import TheWelcome from './components/TheWelcome.vue'
+import GameControls from './components/GameControls.vue'
+import HorseRoster from './components/HorseRoster.vue'
+import RaceTrackPlaceholder from './components/RaceTrackPlaceholder.vue'
+import ResultsPlaceholder from './components/ResultsPlaceholder.vue'
 </script>
 
 <template>
-  <header>
-    <img alt="Vue logo" class="logo" src="./assets/logo.svg" width="125" height="125" />
-
-    <div class="wrapper">
-      <HelloWorld msg="You did it!" />
-    </div>
-  </header>
-
-  <main>
-    <TheWelcome />
-  </main>
+  <div class="col col-roster" data-testid="col-roster">
+    <GameControls />
+    <HorseRoster />
+  </div>
+  <div class="col col-track">
+    <RaceTrackPlaceholder />
+  </div>
+  <div class="col col-results">
+    <ResultsPlaceholder />
+  </div>
 </template>
 
 <style scoped>
-header {
-  line-height: 1.5;
+.col {
+  height: 100vh;
+  overflow: hidden;
 }
 
-.logo {
-  display: block;
-  margin: 0 auto 2rem;
+.col-roster {
+  display: flex;
+  flex-direction: column;
+  background: var(--color-bg-secondary);
+  border-right: 1px solid var(--color-divider);
 }
 
-@media (min-width: 1024px) {
-  header {
-    display: flex;
-    place-items: center;
-    padding-right: calc(var(--section-gap) / 2);
-  }
+.col-track {
+  border-right: 1px solid var(--color-divider);
+}
 
-  .logo {
-    margin: 0 2rem 0 0;
-  }
-
-  header .wrapper {
-    display: flex;
-    place-items: flex-start;
-    flex-wrap: wrap;
-  }
+.col-results {
+  /* no left border — track column has right border */
 }
 </style>
