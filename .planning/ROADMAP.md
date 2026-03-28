@@ -60,7 +60,10 @@ Plans:
   3. Generate button is disabled while `gamePhase` is `RACING` and Start button is disabled when `gamePhase` is `IDLE` or `RACING` / Generate butonu `RACING` fazında devre dışı; Start butonu `IDLE` veya `RACING` fazında devre dışı
   4. Clicking Start transitions `gamePhase` from `SCHEDULED` to `RACING` (verifiable in Vuex devtools before animation exists) / Start tıklandığında `gamePhase`, `SCHEDULED`'dan `RACING`'e geçer (animasyon olmadan Vuex devtools'da doğrulanabilir)
 
-**Plans**: TBD
+**Plans:** 2 plans
+Plans:
+- [x] 02-01-PLAN.md — CSS game tokens + HorseRow + HorseRoster + GameControls components
+- [ ] 02-02-PLAN.md — App.vue 3-column layout + placeholder components + browser verification
 **UI hint**: yes
 
 ### Phase 3: Animated Race Track
@@ -125,8 +128,8 @@ Phases execute in numeric order: 1 → 2 → 3 → 4 → 5
 
 | Phase                   | Plans Complete | Status            | Completed |
 |-------------------------|----------------|-------------------|-----------|
-| 1. Foundation           | 1/2            | In progress       | -         |
-| 2. Roster + Controls UI | 0/TBD          | Not started       | -         |
+| 1. Foundation           | 2/2            | Complete          | -         |
+| 2. Roster + Controls UI | 1/2            | In Progress       | -         |
 | 3. Animated Race Track  | 0/TBD          | Not started       | -         |
 | 4. Results Panel        | 0/TBD          | Not started       | -         |
 | 5. Tests                | 0/TBD          | Not started       | -         |

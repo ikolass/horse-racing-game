@@ -2,13 +2,13 @@
 gsd_state_version: 1.0
 milestone: v1.0
 milestone_name: milestone
-status: Ready to plan
-last_updated: "2026-03-28T12:21:24.628Z"
+status: Executing Phase 02
+last_updated: "2026-03-28T16:47:30Z"
 progress:
   total_phases: 5
   completed_phases: 1
-  total_plans: 2
-  completed_plans: 2
+  total_plans: 4
+  completed_plans: 3
 ---
 
 # Project State / Proje Durumu
@@ -22,19 +22,19 @@ See / Bkz: .planning/PROJECT.md (updated / güncelleme: 2026-03-28)
 
 ## Current Position / Mevcut Konum
 
-Phase / Faz: 1 of 5 (Foundation / Temel)
-Plan: Not started
-Status / Durum: Phase complete / Faz tamamlandı
-Last activity / Son aktivite: 2026-03-28 — 01-02 complete: Vuex store with 4 namespaced modules
+Phase / Faz: 2 of 5 (Roster Controls UI)
+Plan: 02-01 complete (02-02 next)
+Status / Durum: Executing Phase 02
+Last activity / Son aktivite: 2026-03-28 — 02-01 complete: Game CSS tokens + HorseRow/HorseRoster/GameControls components
 
-Progress / İlerleme: [██████████] 100%
+Progress / İlerleme: [████████░░] 75%
 
 ## Performance Metrics / Performans Metrikleri
 
 **Velocity / Hız:**
 
-- Total plans completed / Tamamlanan plan: 2
-- Average duration / Ortalama süre: ~7.5 min
+- Total plans completed / Tamamlanan plan: 3
+- Average duration / Ortalama süre: ~5 min
 - Total execution time / Toplam yürütme süresi: ~0.25 hours
 
 **By Phase / Faz bazında:**
@@ -42,14 +42,16 @@ Progress / İlerleme: [██████████] 100%
 | Phase / Faz | Plans | Total | Avg/Plan |
 |-------------|-------|-------|----------|
 | 1. Foundation | 2 | ~15 min | ~7.5 min |
+| 2. Roster Controls UI | 1 (of 2) | ~2 min | ~2 min |
 
 **Recent Trend / Son Eğilim:**
 
-- Last 5 plans: 01-01 (~8 min), 01-02 (~7 min)
+- Last 5 plans: 01-01 (~8 min), 01-02 (~7 min), 02-01 (~2 min)
 - Trend: Stable
 
 *Updated after each plan completion / Her plan tamamlama sonrası güncellenir*
 | Phase 01-foundation P02 | 7 | 2 tasks | 6 files |
+| Phase 02-roster-controls-ui P01 | 2 | 3 tasks | 5 files |
 
 ## Accumulated Context / Birikmiş Bağlam
 
@@ -68,6 +70,8 @@ Recent decisions affecting current work:
 - 01-02: 20 hand-crafted horse names and manually curated hex colors baked into horses module initial state (D-01, D-06, D-07)
 - 01-02: VALID_TRANSITIONS object guards gamePhase FSM — illegal transitions log console.warn and return false
 - 01-02: startRace action is a thin stub; tick loop deferred to Phase 3
+- 02-01: GameControls dispatches TWO actions on Generate (schedule/generateSchedule + race/transitionTo) because generateSchedule does not transition the FSM
+- 02-01: startDisabled covers IDLE, RACING, DONE; generateDisabled covers only RACING — matches UI-SPEC state/phase matrix
 
 ### Pending Todos / Bekleyen Görevler
 
@@ -81,5 +85,5 @@ None yet / Henüz yok.
 ## Session Continuity / Oturum Sürekliliği
 
 Last session / Son oturum: 2026-03-28
-Stopped at / Durduğu yer: Completed 01-02-PLAN.md — Vuex store with 4 namespaced modules; Phase 1 complete, ready for Phase 2
-Resume file / Devam dosyası: .planning/phases/01-foundation/01-02-SUMMARY.md
+Stopped at / Durduğu yer: Completed 02-01-PLAN.md — Game CSS tokens + HorseRow/HorseRoster/GameControls leaf components; ready for 02-02 (App.vue layout shell + placeholders)
+Resume file / Devam dosyası: .planning/phases/02-roster-controls-ui/02-01-SUMMARY.md

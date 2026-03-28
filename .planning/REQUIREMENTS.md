@@ -15,17 +15,17 @@
 
 ### Schedule / Yarış Programı
 
-- [ ] **SCHED-01**: Player can click Generate to create a 6-round race schedule / Oyuncu Generate ile 6 turluk yarış programı oluşturabilir
-- [ ] **SCHED-02**: Each round randomly selects 10 horses from the 20-horse roster / Her tur 20 attan rastgele 10 at seçer
-- [ ] **SCHED-03**: Round distances are fixed in sequence: 1200m → 1400m → 1600m → 1800m → 2000m → 2200m / Tur mesafeleri sıralı ve sabit
-- [ ] **SCHED-04**: Generate button is disabled while a race is in progress / Yarış devam ederken Generate devre dışı
+- [x] **SCHED-01**: Player can click Generate to create a 6-round race schedule / Oyuncu Generate ile 6 turluk yarış programı oluşturabilir
+- [x] **SCHED-02**: Each round randomly selects 10 horses from the 20-horse roster / Her tur 20 attan rastgele 10 at seçer
+- [x] **SCHED-03**: Round distances are fixed in sequence: 1200m → 1400m → 1600m → 1800m → 2000m → 2200m / Tur mesafeleri sıralı ve sabit
+- [x] **SCHED-04**: Generate button is disabled while a race is in progress / Yarış devam ederken Generate devre dışı
 
 ### Race Engine / Yarış Motoru
 
-- [ ] **RACE-01**: Player can click Start to begin racing rounds one at a time / Oyuncu Start ile yarışları tur tur başlatabilir
+- [x] **RACE-01**: Player can click Start to begin racing rounds one at a time / Oyuncu Start ile yarışları tur tur başlatabilir
 - [x] **RACE-02**: Race outcome is influenced by each horse's condition score (weighted probability) / Yarış sonucu kondisyon puanından etkilenir (ağırlıklı olasılık)
 - [ ] **RACE-03**: Rounds advance automatically after a brief pause when one completes / Tur bitiminde kısa bekleme sonrası sonraki tur otomatik başlar
-- [ ] **RACE-04**: Start button is disabled after racing begins until all 6 rounds complete / Yarış başladıktan sonra Start tüm turlar bitene kadar devre dışı
+- [x] **RACE-04**: Start button is disabled after racing begins until all 6 rounds complete / Yarış başladıktan sonra Start tüm turlar bitene kadar devre dışı
 
 ### Animation / Animasyon
 
@@ -85,12 +85,12 @@
 | ROST-01 | Phase 1 | Complete |
 | ROST-02 | Phase 1 | Complete |
 | RACE-02 | Phase 1 | Complete |
-| SCHED-01 | Phase 2 | Pending |
-| SCHED-02 | Phase 2 | Pending |
-| SCHED-03 | Phase 2 | Pending |
-| SCHED-04 | Phase 2 | Pending |
-| RACE-01 | Phase 2 | Pending |
-| RACE-04 | Phase 2 | Pending |
+| SCHED-01 | Phase 2 | Complete |
+| SCHED-02 | Phase 2 | Complete |
+| SCHED-03 | Phase 2 | Complete |
+| SCHED-04 | Phase 2 | Complete |
+| RACE-01 | Phase 2 | Complete |
+| RACE-04 | Phase 2 | Complete |
 | ANIM-01 | Phase 3 | Pending |
 | ANIM-02 | Phase 3 | Pending |
 | ANIM-03 | Phase 3 | Pending |
