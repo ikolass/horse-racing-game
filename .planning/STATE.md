@@ -3,12 +3,12 @@ gsd_state_version: 1.0
 milestone: v1.0
 milestone_name: milestone
 status: Executing Phase 02
-last_updated: "2026-03-28T16:47:30Z"
+last_updated: "2026-03-28T17:00:00Z"
 progress:
   total_phases: 5
   completed_phases: 1
   total_plans: 4
-  completed_plans: 3
+  completed_plans: 4
 ---
 
 # Project State / Proje Durumu
@@ -23,11 +23,11 @@ See / Bkz: .planning/PROJECT.md (updated / güncelleme: 2026-03-28)
 ## Current Position / Mevcut Konum
 
 Phase / Faz: 2 of 5 (Roster Controls UI)
-Plan: 02-01 complete (02-02 next)
-Status / Durum: Executing Phase 02
-Last activity / Son aktivite: 2026-03-28 — 02-01 complete: Game CSS tokens + HorseRow/HorseRoster/GameControls components
+Plan: 02-02 complete (Phase 02 complete)
+Status / Durum: Phase 02 Complete — Ready for Phase 03
+Last activity / Son aktivite: 2026-03-28 — 02-02 complete: App.vue 3-column layout shell + RaceTrackPlaceholder + ResultsPlaceholder
 
-Progress / İlerleme: [████████░░] 75%
+Progress / İlerleme: [██████████] 100%
 
 ## Performance Metrics / Performans Metrikleri
 
@@ -42,7 +42,7 @@ Progress / İlerleme: [████████░░] 75%
 | Phase / Faz | Plans | Total | Avg/Plan |
 |-------------|-------|-------|----------|
 | 1. Foundation | 2 | ~15 min | ~7.5 min |
-| 2. Roster Controls UI | 1 (of 2) | ~2 min | ~2 min |
+| 2. Roster Controls UI | 2 (of 2) | ~7 min | ~3.5 min |
 
 **Recent Trend / Son Eğilim:**
 
@@ -72,6 +72,7 @@ Recent decisions affecting current work:
 - 01-02: startRace action is a thin stub; tick loop deferred to Phase 3
 - 02-01: GameControls dispatches TWO actions on Generate (schedule/generateSchedule + race/transitionTo) because generateSchedule does not transition the FSM
 - 02-01: startDisabled covers IDLE, RACING, DONE; generateDisabled covers only RACING — matches UI-SPEC state/phase matrix
+- 02-02: Placeholder components have no script block — pure presentational SFCs; three direct App.vue children map 1:1 to CSS grid columns
 
 ### Pending Todos / Bekleyen Görevler
 
@@ -85,5 +86,5 @@ None yet / Henüz yok.
 ## Session Continuity / Oturum Sürekliliği
 
 Last session / Son oturum: 2026-03-28
-Stopped at / Durduğu yer: Completed 02-01-PLAN.md — Game CSS tokens + HorseRow/HorseRoster/GameControls leaf components; ready for 02-02 (App.vue layout shell + placeholders)
-Resume file / Devam dosyası: .planning/phases/02-roster-controls-ui/02-01-SUMMARY.md
+Stopped at / Durduğu yer: Completed 02-02-PLAN.md — App.vue 3-column layout shell + RaceTrackPlaceholder + ResultsPlaceholder; Phase 02 complete, ready for Phase 03
+Resume file / Devam dosyası: .planning/phases/02-roster-controls-ui/02-02-SUMMARY.md

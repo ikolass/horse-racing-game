@@ -15,7 +15,7 @@ Proje, tarayıcı tabanlı eksiksiz oynanabilir at yarışı oyununu beş fazda 
 - Decimal phases (2.1, 2.2): Urgent insertions (marked INSERTED) / Acil eklemeler
 
 - [ ] **Phase 1: Foundation** - Vuex store, data models, GAME_CONFIG, utility functions
-- [ ] **Phase 2: Roster + Controls UI** - 20-horse roster display + Generate/Start button logic
+- [x] **Phase 2: Roster + Controls UI** - 20-horse roster display + Generate/Start button logic
 - [ ] **Phase 3: Animated Race Track** - Race tick engine + CSS animation + round auto-advance
 - [ ] **Phase 4: Results Panel** - Sequential round results display + auto-scroll
 - [ ] **Phase 5: Tests** - Vitest unit tests + Playwright E2E coverage
@@ -63,7 +63,7 @@ Plans:
 **Plans:** 2 plans
 Plans:
 - [x] 02-01-PLAN.md — CSS game tokens + HorseRow + HorseRoster + GameControls components
-- [ ] 02-02-PLAN.md — App.vue 3-column layout + placeholder components + browser verification
+- [x] 02-02-PLAN.md — App.vue 3-column layout + placeholder components + browser verification
 **UI hint**: yes
 
 ### Phase 3: Animated Race Track
@@ -129,7 +129,7 @@ Phases execute in numeric order: 1 → 2 → 3 → 4 → 5
 | Phase                   | Plans Complete | Status            | Completed |
 |-------------------------|----------------|-------------------|-----------|
 | 1. Foundation           | 2/2            | Complete          | -         |
-| 2. Roster + Controls UI | 1/2            | In Progress       | -         |
+| 2. Roster + Controls UI | 2/2            | Complete          | 2026-03-28 |
 | 3. Animated Race Track  | 0/TBD          | Not started       | -         |
 | 4. Results Panel        | 0/TBD          | Not started       | -         |
 | 5. Tests                | 0/TBD          | Not started       | -         |
