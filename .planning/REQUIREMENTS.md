@@ -23,7 +23,7 @@
 ### Race Engine / Yarış Motoru
 
 - [ ] **RACE-01**: Player can click Start to begin racing rounds one at a time / Oyuncu Start ile yarışları tur tur başlatabilir
-- [ ] **RACE-02**: Race outcome is influenced by each horse's condition score (weighted probability) / Yarış sonucu kondisyon puanından etkilenir (ağırlıklı olasılık)
+- [x] **RACE-02**: Race outcome is influenced by each horse's condition score (weighted probability) / Yarış sonucu kondisyon puanından etkilenir (ağırlıklı olasılık)
 - [ ] **RACE-03**: Rounds advance automatically after a brief pause when one completes / Tur bitiminde kısa bekleme sonrası sonraki tur otomatik başlar
 - [ ] **RACE-04**: Start button is disabled after racing begins until all 6 rounds complete / Yarış başladıktan sonra Start tüm turlar bitene kadar devre dışı
 
@@ -84,7 +84,7 @@
 | STATE-03 | Phase 1 | Pending |
 | ROST-01 | Phase 1 | Pending |
 | ROST-02 | Phase 1 | Pending |
-| RACE-02 | Phase 1 | Pending |
+| RACE-02 | Phase 1 | Complete |
 | SCHED-01 | Phase 2 | Pending |
 | SCHED-02 | Phase 2 | Pending |
 | SCHED-03 | Phase 2 | Pending |

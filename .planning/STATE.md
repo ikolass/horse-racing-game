@@ -10,27 +10,27 @@ See / Bkz: .planning/PROJECT.md (updated / güncelleme: 2026-03-28)
 ## Current Position / Mevcut Konum
 
 Phase / Faz: 1 of 5 (Foundation / Temel)
-Plan: 0 of TBD in current phase
-Status / Durum: Ready to plan / Planlama için hazır
-Last activity / Son aktivite: 2026-03-28 — Roadmap created, milestone v1.0 initialized / Yol haritası oluşturuldu, v1.0 başlatıldı
+Plan: 1 of 2 in current phase
+Status / Durum: In progress / Devam ediyor
+Last activity / Son aktivite: 2026-03-28 — 01-01 complete: GAME_CONFIG + shuffle + raceEngine utilities
 
-Progress / İlerleme: [░░░░░░░░░░] 0%
+Progress / İlerleme: [█░░░░░░░░░] 10%
 
 ## Performance Metrics / Performans Metrikleri
 
 **Velocity / Hız:**
-- Total plans completed / Tamamlanan plan: 0
-- Average duration / Ortalama süre: —
-- Total execution time / Toplam yürütme süresi: 0 hours
+- Total plans completed / Tamamlanan plan: 1
+- Average duration / Ortalama süre: ~8 min
+- Total execution time / Toplam yürütme süresi: ~0.13 hours
 
 **By Phase / Faz bazında:**
 
 | Phase / Faz | Plans | Total | Avg/Plan |
 |-------------|-------|-------|----------|
-| - | - | - | - |
+| 1. Foundation | 1 | ~8 min | ~8 min |
 
 **Recent Trend / Son Eğilim:**
-- Last 5 plans: —
+- Last 5 plans: 01-01 (~8 min)
 - Trend: —
 
 *Updated after each plan completion / Her plan tamamlama sonrası güncellenir*
@@ -46,6 +46,9 @@ Recent decisions affecting current work:
 - Foundation: `setInterval` ID stored in Vuex state for cleanup; actual interval reference lives in module-scope closure
 - Foundation: Single `UPDATE_ALL_POSITIONS` mutation per tick (not one per horse) to avoid Vue reactivity overload
 - Foundation: Tick interval (200ms) >= CSS transition duration (180ms) — co-designed as one decision
+- 01-01: Linear weighting (D-03): weight = raw condition score; horse with condition 80 is twice as likely to place before horse with condition 40
+- 01-01: No randomness floor (D-04): pure weighted random, no minimum base weight; condition 1 horse can still win
+- 01-01: GAME_CONFIG scope (D-05): 4 keys only (TOTAL_HORSES, HORSES_PER_ROUND, TOTAL_ROUNDS, ROUND_DISTANCES); animation/tick constants deferred to Phase 3
 
 ### Pending Todos / Bekleyen Görevler
 
@@ -60,5 +63,5 @@ None yet / Henüz yok.
 ## Session Continuity / Oturum Sürekliliği
 
 Last session / Son oturum: 2026-03-28
-Stopped at / Durduğu yer: Roadmap created — ready to begin Phase 1 planning / Yol haritası oluşturuldu — Faz 1 planlaması başlatılabilir
-Resume file / Devam dosyası: None / Yok
+Stopped at / Durduğu yer: Completed 01-01-PLAN.md — GAME_CONFIG + shuffle + raceEngine; ready for 01-02-PLAN.md (Vuex store)
+Resume file / Devam dosyası: .planning/phases/01-foundation/01-01-SUMMARY.md

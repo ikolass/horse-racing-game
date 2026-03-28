@@ -42,7 +42,7 @@ Proje, tarayıcı tabanlı eksiksiz oynanabilir at yarışı oyununu beş fazda 
 
 **Plans:** 2 plans
 Plans:
-- [ ] 01-01-PLAN.md — GAME_CONFIG constants + shuffle and raceEngine utilities
+- [x] 01-01-PLAN.md — GAME_CONFIG constants + shuffle and raceEngine utilities
 - [ ] 01-02-PLAN.md — Vuex store with 4 modules (horses, schedule, race, results) + main.js registration
 
 ### Phase 2: Roster + Controls UI
@@ -125,7 +125,7 @@ Phases execute in numeric order: 1 → 2 → 3 → 4 → 5
 
 | Phase                   | Plans Complete | Status            | Completed |
 |-------------------------|----------------|-------------------|-----------|
-| 1. Foundation           | 0/2            | Planning complete | -         |
+| 1. Foundation           | 1/2            | In progress       | -         |
 | 2. Roster + Controls UI | 0/TBD          | Not started       | -         |
 | 3. Animated Race Track  | 0/TBD          | Not started       | -         |
 | 4. Results Panel        | 0/TBD          | Not started       | -         |
