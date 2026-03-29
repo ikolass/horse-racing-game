@@ -103,9 +103,9 @@ Plans:
   3. Results accumulate in chronological order — Round 1 at top, Round 6 at bottom — with no rounds skipped or duplicated / Sonuçlar kronolojik sırayla birikir — Round 1 üstte, Round 6 altta — atlanan veya tekrarlanan tur yok
   4. The results panel automatically scrolls to bring the most recently added result into view / Sonuçlar paneli, en son eklenen sonucu görünüme getirmek için otomatik kayar
 
-**Plans:** 2 plans
+**Plans:** 1/2 plans executed
 Plans:
-- [ ] 04-01-PLAN.md — Store wiring: finish order derivation in onRoundComplete + clear results on Generate
+- [x] 04-01-PLAN.md — Store wiring: finish order derivation in onRoundComplete + clear results on Generate
 - [ ] 04-02-PLAN.md — ResultsPanel.vue component + App.vue swap + visual verification
 **UI hint**: yes
 
@@ -137,7 +137,7 @@ Phases execute in numeric order: 1 → 2 → 3 → 4 → 5
 | 1. Foundation           | 2/2            | Complete          | -         |
 | 2. Roster + Controls UI | 2/2            | Complete          | 2026-03-28 |
 | 3. Animated Race Track  | 2/2 | Complete | 2026-03-29 |
-| 4. Results Panel        | 0/2            | Planned           | -         |
+| 4. Results Panel        | 1/2 | In Progress|  |
 | 5. Tests                | 0/TBD          | Not started       | -         |
 
 ---

@@ -3,12 +3,12 @@ gsd_state_version: 1.0
 milestone: v1.0
 milestone_name: milestone
 status: Ready to plan
-last_updated: "2026-03-29T17:04:25.900Z"
+last_updated: "2026-03-29T18:11:30.694Z"
 progress:
   total_phases: 5
   completed_phases: 3
-  total_plans: 6
-  completed_plans: 6
+  total_plans: 8
+  completed_plans: 7
 ---
 
 # Project State / Proje Durumu
@@ -22,12 +22,12 @@ See / Bkz: .planning/PROJECT.md (updated / güncelleme: 2026-03-28)
 
 ## Current Position / Mevcut Konum
 
-Phase / Faz: 4 of 5 (Results Panel — next)
-Plan: Not started
-Status / Durum: Phase 03 Complete — 03-01 and 03-02 done; ready for Phase 4 (Results Panel)
-Last activity / Son aktivite: 2026-03-29 — 03-02 complete: RaceTrack.vue animated track; App.vue swap; visual verification approved; ROUND_COMPLETE Start Race guard added
+Phase / Faz: 4 of 5 (Results Panel — in progress)
+Plan: 04-01 complete
+Status / Durum: Phase 04 in progress — 04-01 done; race engine wired to results module
+Last activity / Son aktivite: 2026-03-29 — 04-01 complete: onRoundComplete dispatches finishOrder; Generate clears results; results.js actions added
 
-Progress / İlerleme: [█████████░] 92%
+Progress / İlerleme: [█████████░] 88%
 
 ## Performance Metrics / Performans Metrikleri
 
@@ -53,6 +53,7 @@ Progress / İlerleme: [█████████░] 92%
 | Phase 01-foundation P02 | 7 | 2 tasks | 6 files |
 | Phase 02-roster-controls-ui P01 | 2 | 3 tasks | 5 files |
 | Phase 03-animated-race-track P01 | 2 | 3 tasks | 3 files |
+| Phase 04-results-panel P01 | 2 | 2 tasks | 3 files |
 
 ## Accumulated Context / Birikmiş Bağlam
 
@@ -81,6 +82,8 @@ Recent decisions affecting current work:
 - 03-02: .horse-marker is child of .track-area (not .lane) — left: 0%-100% scopes to track area only, keeping 120px label column fixed
 - 03-02: Start Race also disabled during ROUND_COMPLETE — prevents double-start during 1.5s inter-round pause
 - 03-02: Horse markers stay at left: 100% during ROUND_COMPLETE — provides visual feedback before reset
+- 04-01: finishOrder derived by sorting horseIndices by condition descending (b-a) — deterministic, mirrors race engine speed formula
+- 04-01: results.js actions block added (addRoundResult + clearResults) — required for cross-module dispatch resolution in namespaced Vuex modules
 
 ### Pending Todos / Bekleyen Görevler
 
@@ -94,5 +97,5 @@ None yet / Henüz yok.
 ## Session Continuity / Oturum Sürekliliği
 
 Last session / Son oturum: 2026-03-29
-Stopped at / Durduğu yer: Completed 03-02-PLAN.md — Phase 3 fully done; next is Phase 4 (Results Panel)
-Resume file / Devam dosyası: N/A — Phase 4 plans TBD
+Stopped at / Durduğu yer: Completed 04-01-PLAN.md — race engine wired to results module; finishOrder dispatch; Generate clears results
+Resume file / Devam dosyası: N/A — next is 04-02 (ResultsPanel component)

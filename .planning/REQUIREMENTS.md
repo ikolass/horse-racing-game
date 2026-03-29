@@ -35,8 +35,8 @@
 
 ### Results / Sonuçlar
 
-- [ ] **RESULT-01**: Race results appear sequentially in the Results panel as each round concludes / Her tur bitiminde sonuçlar sıralı olarak Sonuçlar panelinde görünür
-- [ ] **RESULT-02**: Each result entry shows round number, distance, and full finishing order (1st–10th) / Her sonuç tur no., mesafe ve tam bitiş sıralamasını (1.–10.) gösterir
+- [x] **RESULT-01**: Race results appear sequentially in the Results panel as each round concludes / Her tur bitiminde sonuçlar sıralı olarak Sonuçlar panelinde görünür
+- [x] **RESULT-02**: Each result entry shows round number, distance, and full finishing order (1st–10th) / Her sonuç tur no., mesafe ve tam bitiş sıralamasını (1.–10.) gösterir
 - [ ] **RESULT-03**: Results panel auto-scrolls to the latest result / Sonuçlar paneli en son sonuca otomatik kayar
 
 ### State Management / Durum Yönetimi
@@ -96,8 +96,8 @@
 | ANIM-03 | Phase 3 | Complete |
 | ROST-03 | Phase 3 | Complete |
 | RACE-03 | Phase 3 | Complete |
-| RESULT-01 | Phase 4 | Pending |
-| RESULT-02 | Phase 4 | Pending |
+| RESULT-01 | Phase 4 | Complete |
+| RESULT-02 | Phase 4 | Complete |
 | RESULT-03 | Phase 4 | Pending |
 | TEST-01 | Phase 5 | Pending |
 | TEST-02 | Phase 5 | Pending |
