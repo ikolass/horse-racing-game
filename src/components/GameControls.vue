@@ -30,7 +30,7 @@ const generateDisabled = computed(() =>
   gamePhase.value === 'RACING' || gamePhase.value === 'ROUND_COMPLETE'
 )
 const startDisabled = computed(() =>
-  gamePhase.value === 'IDLE' || gamePhase.value === 'RACING' || gamePhase.value === 'DONE'
+  gamePhase.value === 'IDLE' || gamePhase.value === 'RACING' || gamePhase.value === 'ROUND_COMPLETE' || gamePhase.value === 'DONE'
 )
 
 function handleGenerate() {

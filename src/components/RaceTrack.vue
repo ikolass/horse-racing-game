@@ -24,9 +24,13 @@ const racingHorses = computed(() => {
   }))
 })
 
-// Convert 0.0-1.0 position to CSS percentage string
-function positionPercent(horseIdx) {
-  return ((positions.value[horseIdx] ?? 0) * 100) + '%'
+// Returns marker style: at finish line (right-anchored) or in-track (left-anchored)
+function markerStyle(horseIdx) {
+  const pos = positions.value[horseIdx] ?? 0
+  if (pos >= 1.0) {
+    return { right: '4px', left: 'auto' }
+  }
+  return { left: (pos * 100) + '%' }
 }
 
 // Whether a schedule exists (controls empty state vs track display)
@@ -56,7 +60,7 @@ const hasSchedule = computed(() => !!visibleRound.value)
             <div
               class="horse-marker"
               :data-testid="`marker-${horse.idx}`"
-              :style="{ left: positionPercent(horse.idx) }"
+              :style="markerStyle(horse.idx)"
             >
               <span class="marker-swatch" :style="{ backgroundColor: horse.color }"></span>
               <span class="marker-name">{{ horse.name }}</span>
