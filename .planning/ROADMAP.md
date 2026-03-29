@@ -82,9 +82,9 @@ Plans:
   4. Each horse's condition score badge is visible on the track during the round / Her atın kondisyon puanı rozeti tur sırasında pistte görünür
   5. After a round completes, the next round starts automatically after a brief pause without requiring user interaction / Bir tur tamamlandıktan sonra, kullanıcı etkileşimi gerekmeksizin kısa bir duraklamanın ardından sonraki tur otomatik başlar
 
-**Plans:** 2 plans
+**Plans:** 1/2 plans executed
 Plans:
-- [ ] 03-01-PLAN.md — Race tick engine (race.js extension + gameConfig constants + GameControls fix)
+- [x] 03-01-PLAN.md — Race tick engine (race.js extension + gameConfig constants + GameControls fix)
 - [ ] 03-02-PLAN.md — RaceTrack.vue component + App.vue swap + visual verification
 **UI hint**: yes
 
@@ -133,7 +133,7 @@ Phases execute in numeric order: 1 → 2 → 3 → 4 → 5
 |-------------------------|----------------|-------------------|-----------|
 | 1. Foundation           | 2/2            | Complete          | -         |
 | 2. Roster + Controls UI | 2/2            | Complete          | 2026-03-28 |
-| 3. Animated Race Track  | 0/2            | Planned           | -         |
+| 3. Animated Race Track  | 1/2 | In Progress|  |
 | 4. Results Panel        | 0/TBD          | Not started       | -         |
 | 5. Tests                | 0/TBD          | Not started       | -         |
 

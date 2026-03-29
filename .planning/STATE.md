@@ -3,12 +3,12 @@ gsd_state_version: 1.0
 milestone: v1.0
 milestone_name: milestone
 status: Ready to plan
-last_updated: "2026-03-28T17:38:38.436Z"
+last_updated: "2026-03-29T09:35:00.067Z"
 progress:
   total_phases: 5
   completed_phases: 2
-  total_plans: 4
-  completed_plans: 4
+  total_plans: 6
+  completed_plans: 5
 ---
 
 # Project State / Proje Durumu
@@ -22,12 +22,12 @@ See / Bkz: .planning/PROJECT.md (updated / güncelleme: 2026-03-28)
 
 ## Current Position / Mevcut Konum
 
-Phase / Faz: 2 of 5 (Roster Controls UI)
-Plan: Not started
-Status / Durum: Phase 02 Complete — Ready for Phase 03
-Last activity / Son aktivite: 2026-03-28 — 02-02 complete: App.vue 3-column layout shell + RaceTrackPlaceholder + ResultsPlaceholder
+Phase / Faz: 3 of 5 (Animated Race Track)
+Plan: 03-01 complete
+Status / Durum: Phase 03 In Progress — 03-01 complete, 03-02 remaining
+Last activity / Son aktivite: 2026-03-29 — 03-01 complete: race tick engine + auto-advance in race.js; GAME_CONFIG tick constants; GameControls ROUND_COMPLETE guard
 
-Progress / İlerleme: [██████████] 100%
+Progress / İlerleme: [████████░░] 83%
 
 ## Performance Metrics / Performans Metrikleri
 
@@ -52,6 +52,7 @@ Progress / İlerleme: [██████████] 100%
 *Updated after each plan completion / Her plan tamamlama sonrası güncellenir*
 | Phase 01-foundation P02 | 7 | 2 tasks | 6 files |
 | Phase 02-roster-controls-ui P01 | 2 | 3 tasks | 5 files |
+| Phase 03-animated-race-track P01 | 2 | 3 tasks | 3 files |
 
 ## Accumulated Context / Birikmiş Bağlam
 
@@ -73,6 +74,9 @@ Recent decisions affecting current work:
 - 02-01: GameControls dispatches TWO actions on Generate (schedule/generateSchedule + race/transitionTo) because generateSchedule does not transition the FSM
 - 02-01: startDisabled covers IDLE, RACING, DONE; generateDisabled covers only RACING — matches UI-SPEC state/phase matrix
 - 02-02: Placeholder components have no script block — pure presentational SFCs; three direct App.vue children map 1:1 to CSS grid columns
+- 03-01: Speed formula: condition / (maxCondition * TICKS_TO_WIN) — winner always reaches 1.0 in exactly 60 ticks
+- 03-01: Generate button blocked during ROUND_COMPLETE to prevent schedule corruption during 1.5s auto-advance pause
+- 03-01: _intervalRef is module-scope closure (not Vuex state); only numeric ID goes in state.intervalId
 
 ### Pending Todos / Bekleyen Görevler
 
@@ -85,6 +89,6 @@ None yet / Henüz yok.
 
 ## Session Continuity / Oturum Sürekliliği
 
-Last session / Son oturum: 2026-03-28
-Stopped at / Durduğu yer: Completed 02-02-PLAN.md — App.vue 3-column layout shell + RaceTrackPlaceholder + ResultsPlaceholder; Phase 02 complete, ready for Phase 03
-Resume file / Devam dosyası: .planning/phases/02-roster-controls-ui/02-02-SUMMARY.md
+Last session / Son oturum: 2026-03-29
+Stopped at / Durduğu yer: Completed 03-01-PLAN.md — race tick engine + auto-advance; ready for 03-02 (RaceTrack component)
+Resume file / Devam dosyası: .planning/phases/03-animated-race-track/03-01-SUMMARY.md

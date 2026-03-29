@@ -24,12 +24,12 @@
 
 - [x] **RACE-01**: Player can click Start to begin racing rounds one at a time / Oyuncu Start ile yarışları tur tur başlatabilir
 - [x] **RACE-02**: Race outcome is influenced by each horse's condition score (weighted probability) / Yarış sonucu kondisyon puanından etkilenir (ağırlıklı olasılık)
-- [ ] **RACE-03**: Rounds advance automatically after a brief pause when one completes / Tur bitiminde kısa bekleme sonrası sonraki tur otomatik başlar
+- [x] **RACE-03**: Rounds advance automatically after a brief pause when one completes / Tur bitiminde kısa bekleme sonrası sonraki tur otomatik başlar
 - [x] **RACE-04**: Start button is disabled after racing begins until all 6 rounds complete / Yarış başladıktan sonra Start tüm turlar bitene kadar devre dışı
 
 ### Animation / Animasyon
 
-- [ ] **ANIM-01**: Horses visibly move across the track via CSS transitions during each round / Her turda atlar CSS geçişiyle pist üzerinde görünür hareket eder
+- [x] **ANIM-01**: Horses visibly move across the track via CSS transitions during each round / Her turda atlar CSS geçişiyle pist üzerinde görünür hareket eder
 - [ ] **ANIM-02**: Each horse races in its own dedicated lane with no visual overlap / Her at ayrı şeridinde yarışır; üst üste binme yok
 - [ ] **ANIM-03**: Current round number, distance, and participating horses are shown during the race / Aktif tur numarası, mesafe ve katılımcı atlar yarış sırasında gösterilir
 
@@ -91,11 +91,11 @@
 | SCHED-04 | Phase 2 | Complete |
 | RACE-01 | Phase 2 | Complete |
 | RACE-04 | Phase 2 | Complete |
-| ANIM-01 | Phase 3 | Pending |
+| ANIM-01 | Phase 3 | Complete |
 | ANIM-02 | Phase 3 | Pending |
 | ANIM-03 | Phase 3 | Pending |
 | ROST-03 | Phase 3 | Pending |
-| RACE-03 | Phase 3 | Pending |
+| RACE-03 | Phase 3 | Complete |
 | RESULT-01 | Phase 4 | Pending |
 | RESULT-02 | Phase 4 | Pending |
 | RESULT-03 | Phase 4 | Pending |
