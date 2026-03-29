@@ -1,7 +1,7 @@
 <script setup>
 import GameControls from './components/GameControls.vue'
 import HorseRoster from './components/HorseRoster.vue'
-import RaceTrackPlaceholder from './components/RaceTrackPlaceholder.vue'
+import RaceTrack from './components/RaceTrack.vue'
 import ResultsPlaceholder from './components/ResultsPlaceholder.vue'
 </script>
 
@@ -11,7 +11,7 @@ import ResultsPlaceholder from './components/ResultsPlaceholder.vue'
     <HorseRoster />
   </div>
   <div class="col col-track">
-    <RaceTrackPlaceholder />
+    <RaceTrack />
   </div>
   <div class="col col-results">
     <ResultsPlaceholder />
