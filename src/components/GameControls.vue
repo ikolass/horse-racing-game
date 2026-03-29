@@ -26,7 +26,9 @@ import { computed } from 'vue'
 const store = useStore()
 const gamePhase = computed(() => store.getters['race/gamePhase'])
 
-const generateDisabled = computed(() => gamePhase.value === 'RACING')
+const generateDisabled = computed(() =>
+  gamePhase.value === 'RACING' || gamePhase.value === 'ROUND_COMPLETE'
+)
 const startDisabled = computed(() =>
   gamePhase.value === 'IDLE' || gamePhase.value === 'RACING' || gamePhase.value === 'DONE'
 )
