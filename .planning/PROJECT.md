@@ -42,9 +42,9 @@ Animasyonlu yarışlar, Vuex state yönetimi ve bileşen tabanlı Vue 3 mimarisi
 
 ### Active / Aktif
 - [x] Horses animate visually across the track during each round / Her turda atlar pist üzerinde görsel animasyonla hareket eder *(Validated in Phase 3: Animated Race Track — RaceTrack.vue with CSS transitions, auto-advance, browser-verified)*
-- [ ] Race results display sequentially in a Results panel as each round completes / Her tur tamamlandığında yarış sonuçları Sonuçlar panelinde sıralı görüntülenir
-- [ ] Race outcome is influenced by each horse's condition score / Yarış sonucu atların kondisyon puanından etkilenir
-- [ ] Vuex manages all game state (horses, schedule, current round, results) / Vuex tüm oyun durumunu yönetir (atlar, program, mevcut tur, sonuçlar)
+- [x] Race results display sequentially in a Results panel as each round completes / Her tur tamamlandığında yarış sonuçları Sonuçlar panelinde sıralı görüntülenir *(Validated in Phase 4: Results Panel — ResultsPanel.vue with auto-scroll, finishOrder dispatch, browser-verified)*
+- [x] Race outcome is influenced by each horse's condition score / Yarış sonucu atların kondisyon puanından etkilenir *(Validated in Phase 4: Results Panel — finishOrder derived by sorting horseIndices by condition descending)*
+- [x] Vuex manages all game state (horses, schedule, current round, results) / Vuex tüm oyun durumunu yönetir *(Validated in Phase 4: Results Panel — results module wired with addRoundResult/clearResults actions)*
 - [ ] Unit tests cover store logic and key components / Birim testleri store mantığını ve temel bileşenleri kapsar
 - [ ] E2E tests cover the full generate → start → results flow / E2E testleri tam üret → başlat → sonuçlar akışını kapsar
 
@@ -100,4 +100,4 @@ Bu belge faz geçişlerinde ve milestone sınırlarında güncellenir.
 4. Update Context with current state / Bağlamı mevcut durumla güncelle
 
 ---
-*Last updated / Son güncelleme: 2026-03-29 — Phase 3 (Animated Race Track) complete / Faz 3 tamamlandı*
+*Last updated / Son güncelleme: 2026-03-29 — Phase 4 (Results Panel) complete / Faz 4 tamamlandı*
