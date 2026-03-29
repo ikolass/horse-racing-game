@@ -1,3 +1,5 @@
+import { GAME_CONFIG } from '@/config/gameConfig.js'
+
 const VALID_TRANSITIONS = {
   IDLE: ['SCHEDULED'],
   SCHEDULED: ['RACING'],
@@ -5,6 +7,8 @@ const VALID_TRANSITIONS = {
   ROUND_COMPLETE: ['RACING', 'DONE'],
   DONE: ['IDLE'],
 };
+
+let _intervalRef = null
 
 const race = {
   namespaced: true,
@@ -41,9 +45,79 @@ const race = {
       commit('SET_GAME_PHASE', phase);
       return true;
     },
-    startRace({ commit, dispatch }) {
+    startRace({ commit, dispatch, rootGetters }) {
       dispatch('transitionTo', 'RACING');
       commit('SET_CURRENT_ROUND', 1);
+      const round = rootGetters['schedule/roundByNumber'](1);
+      if (round) dispatch('runRound', { horseIndices: round.horseIndices });
+    },
+    runRound({ commit, state, rootState, dispatch }, { horseIndices }) {
+      // Defensively clear any existing interval
+      if (_intervalRef) {
+        clearInterval(_intervalRef);
+        _intervalRef = null;
+      }
+
+      // Map horse indices to horse objects
+      const horses = horseIndices.map(idx => rootState.horses.list[idx]);
+
+      // Find max condition
+      const maxCondition = Math.max(...horses.map(h => h.condition));
+
+      // Pre-compute constant speeds (no per-tick randomness)
+      const speeds = {};
+      horseIndices.forEach((idx, i) => {
+        speeds[idx] = horses[i].condition / (maxCondition * GAME_CONFIG.TICKS_TO_WIN);
+      });
+
+      // Initialize positions to 0
+      const initPos = {};
+      horseIndices.forEach(idx => { initPos[idx] = 0; });
+      commit('SET_POSITIONS', initPos);
+
+      // Start the tick loop
+      _intervalRef = setInterval(() => {
+        const current = { ...state.positions };
+        let allDone = true;
+
+        horseIndices.forEach(idx => {
+          if (current[idx] < 1.0) {
+            current[idx] = Math.min(current[idx] + speeds[idx], 1.0);
+            if (current[idx] < 1.0) {
+              allDone = false;
+            }
+          }
+        });
+
+        commit('SET_POSITIONS', current);
+
+        if (allDone) {
+          clearInterval(_intervalRef);
+          _intervalRef = null;
+          commit('SET_INTERVAL_ID', null);
+          dispatch('onRoundComplete');
+        }
+      }, GAME_CONFIG.TICK_INTERVAL_MS);
+
+      commit('SET_INTERVAL_ID', _intervalRef);
+    },
+    onRoundComplete({ commit, state, dispatch }) {
+      dispatch('transitionTo', 'ROUND_COMPLETE');
+      setTimeout(() => {
+        if (state.currentRound >= GAME_CONFIG.TOTAL_ROUNDS) {
+          dispatch('transitionTo', 'DONE');
+        } else {
+          const nextRound = state.currentRound + 1;
+          commit('RESET_POSITIONS');
+          commit('SET_CURRENT_ROUND', nextRound);
+          dispatch('transitionTo', 'RACING');
+          dispatch('startRoundByNumber', nextRound);
+        }
+      }, GAME_CONFIG.PAUSE_BETWEEN_ROUNDS_MS);
+    },
+    startRoundByNumber({ dispatch, rootGetters }, roundNumber) {
+      const round = rootGetters['schedule/roundByNumber'](roundNumber);
+      if (round) dispatch('runRound', { horseIndices: round.horseIndices });
     },
   },
   getters: {
