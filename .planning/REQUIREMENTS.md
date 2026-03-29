@@ -11,7 +11,7 @@
 
 - [x] **ROST-01**: Player can view all 20 horses with name, unique color, and condition score (1–100) / Oyuncu 20 atın tamamını isim, benzersiz renk ve kondisyon puanıyla görebilir
 - [x] **ROST-02**: Each horse is displayed with a distinct color swatch in the roster panel / Her at kadro panelinde benzersiz renk göstergesiyle listelenir
-- [ ] **ROST-03**: Horse condition score badge is visible on the race track during each round / Kondisyon puanı rozeti her turda pist üzerinde görünür
+- [x] **ROST-03**: Horse condition score badge is visible on the race track during each round / Kondisyon puanı rozeti her turda pist üzerinde görünür
 
 ### Schedule / Yarış Programı
 
@@ -30,8 +30,8 @@
 ### Animation / Animasyon
 
 - [x] **ANIM-01**: Horses visibly move across the track via CSS transitions during each round / Her turda atlar CSS geçişiyle pist üzerinde görünür hareket eder
-- [ ] **ANIM-02**: Each horse races in its own dedicated lane with no visual overlap / Her at ayrı şeridinde yarışır; üst üste binme yok
-- [ ] **ANIM-03**: Current round number, distance, and participating horses are shown during the race / Aktif tur numarası, mesafe ve katılımcı atlar yarış sırasında gösterilir
+- [x] **ANIM-02**: Each horse races in its own dedicated lane with no visual overlap / Her at ayrı şeridinde yarışır; üst üste binme yok
+- [x] **ANIM-03**: Current round number, distance, and participating horses are shown during the race / Aktif tur numarası, mesafe ve katılımcı atlar yarış sırasında gösterilir
 
 ### Results / Sonuçlar
 
@@ -92,9 +92,9 @@
 | RACE-01 | Phase 2 | Complete |
 | RACE-04 | Phase 2 | Complete |
 | ANIM-01 | Phase 3 | Complete |
-| ANIM-02 | Phase 3 | Pending |
-| ANIM-03 | Phase 3 | Pending |
-| ROST-03 | Phase 3 | Pending |
+| ANIM-02 | Phase 3 | Complete |
+| ANIM-03 | Phase 3 | Complete |
+| ROST-03 | Phase 3 | Complete |
 | RACE-03 | Phase 3 | Complete |
 | RESULT-01 | Phase 4 | Pending |
 | RESULT-02 | Phase 4 | Pending |

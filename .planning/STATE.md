@@ -3,12 +3,12 @@ gsd_state_version: 1.0
 milestone: v1.0
 milestone_name: milestone
 status: Ready to plan
-last_updated: "2026-03-29T09:35:00.067Z"
+last_updated: "2026-03-29T12:00:00.000Z"
 progress:
   total_phases: 5
-  completed_phases: 2
+  completed_phases: 3
   total_plans: 6
-  completed_plans: 5
+  completed_plans: 6
 ---
 
 # Project State / Proje Durumu
@@ -22,12 +22,12 @@ See / Bkz: .planning/PROJECT.md (updated / güncelleme: 2026-03-28)
 
 ## Current Position / Mevcut Konum
 
-Phase / Faz: 3 of 5 (Animated Race Track)
-Plan: 03-01 complete
-Status / Durum: Phase 03 In Progress — 03-01 complete, 03-02 remaining
-Last activity / Son aktivite: 2026-03-29 — 03-01 complete: race tick engine + auto-advance in race.js; GAME_CONFIG tick constants; GameControls ROUND_COMPLETE guard
+Phase / Faz: 4 of 5 (Results Panel — next)
+Plan: 03-02 complete
+Status / Durum: Phase 03 Complete — 03-01 and 03-02 done; ready for Phase 4 (Results Panel)
+Last activity / Son aktivite: 2026-03-29 — 03-02 complete: RaceTrack.vue animated track; App.vue swap; visual verification approved; ROUND_COMPLETE Start Race guard added
 
-Progress / İlerleme: [████████░░] 83%
+Progress / İlerleme: [█████████░] 92%
 
 ## Performance Metrics / Performans Metrikleri
 
@@ -77,6 +77,10 @@ Recent decisions affecting current work:
 - 03-01: Speed formula: condition / (maxCondition * TICKS_TO_WIN) — winner always reaches 1.0 in exactly 60 ticks
 - 03-01: Generate button blocked during ROUND_COMPLETE to prevent schedule corruption during 1.5s auto-advance pause
 - 03-01: _intervalRef is module-scope closure (not Vuex state); only numeric ID goes in state.intervalId
+- 03-02: transition: left 45ms linear (NOT transition: all) — 45ms < 50ms tick interval guarantees smooth animation without animating layout/color changes
+- 03-02: .horse-marker is child of .track-area (not .lane) — left: 0%-100% scopes to track area only, keeping 120px label column fixed
+- 03-02: Start Race also disabled during ROUND_COMPLETE — prevents double-start during 1.5s inter-round pause
+- 03-02: Horse markers stay at left: 100% during ROUND_COMPLETE — provides visual feedback before reset
 
 ### Pending Todos / Bekleyen Görevler
 
@@ -84,11 +88,11 @@ None yet / Henüz yok.
 
 ### Blockers/Concerns / Engelleyiciler/Endişeler
 
-- Phase 3: CSS transition timing calibration needs a quick prototype before committing to final tick interval value
 - Phase 5: Playwright selectors need `data-testid` attributes on results/controls/round indicators; use 15s timeout (default 5s < animation duration)
+- Note: Phase 3 CSS transition timing resolved — 45ms transition / 50ms tick works without calibration prototype
 
 ## Session Continuity / Oturum Sürekliliği
 
 Last session / Son oturum: 2026-03-29
-Stopped at / Durduğu yer: 03-02 Tasks 1-2 complete (RaceTrack.vue created, App.vue swapped); awaiting checkpoint human-verify Task 3
-Resume file / Devam dosyası: .planning/phases/03-animated-race-track/03-02-PLAN.md (Task 3 checkpoint)
+Stopped at / Durduğu yer: Completed 03-02-PLAN.md — Phase 3 fully done; next is Phase 4 (Results Panel)
+Resume file / Devam dosyası: N/A — Phase 4 plans TBD
