@@ -36,6 +36,7 @@ const startDisabled = computed(() =>
 function handleGenerate() {
   store.dispatch('schedule/generateSchedule')
   store.dispatch('race/transitionTo', 'SCHEDULED')
+  store.dispatch('results/clearResults')
 }
 
 function handleStart() {
