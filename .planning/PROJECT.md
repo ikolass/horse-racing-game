@@ -41,7 +41,7 @@ Animasyonlu yarışlar, Vuex state yönetimi ve bileşen tabanlı Vue 3 mimarisi
 - [x] Player can click Start to begin running races one round at a time / Oyuncu Start butonuyla yarışları tur tur başlatabilir *(Validated in Phase 2: Roster + Controls UI — Start button transitions gamePhase SCHEDULED→RACING, browser-verified)*
 
 ### Active / Aktif
-- [ ] Horses animate visually across the track during each round / Her turda atlar pist üzerinde görsel animasyonla hareket eder
+- [x] Horses animate visually across the track during each round / Her turda atlar pist üzerinde görsel animasyonla hareket eder *(Validated in Phase 3: Animated Race Track — RaceTrack.vue with CSS transitions, auto-advance, browser-verified)*
 - [ ] Race results display sequentially in a Results panel as each round completes / Her tur tamamlandığında yarış sonuçları Sonuçlar panelinde sıralı görüntülenir
 - [ ] Race outcome is influenced by each horse's condition score / Yarış sonucu atların kondisyon puanından etkilenir
 - [ ] Vuex manages all game state (horses, schedule, current round, results) / Vuex tüm oyun durumunu yönetir (atlar, program, mevcut tur, sonuçlar)
@@ -100,4 +100,4 @@ Bu belge faz geçişlerinde ve milestone sınırlarında güncellenir.
 4. Update Context with current state / Bağlamı mevcut durumla güncelle
 
 ---
-*Last updated / Son güncelleme: 2026-03-28 — Phase 2 (Roster + Controls UI) complete / Faz 2 tamamlandı*
+*Last updated / Son güncelleme: 2026-03-29 — Phase 3 (Animated Race Track) complete / Faz 3 tamamlandı*
