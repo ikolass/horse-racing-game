@@ -1,7 +1,14 @@
 {
   "permissions": {
     "allow": [
-      "Skill(gsd:discuss-phase)"
+      "Skill(gsd:discuss-phase)",
+      "Bash(node:*)",
+      "Bash(git add:*)",
+      "Bash(git:*)",
+      "Bash(npx vitest:*)",
+      "Bash(grep:*)",
+      "Bash(ls /c/Users/Administrator/WebstormProjects/untitled/.planning/phases/03-animated-race-track/*VERIFICATION*)",
+      "Skill(gsd:execute-phase)"
     ]
   }
 }
