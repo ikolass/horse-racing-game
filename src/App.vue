@@ -2,7 +2,7 @@
 import GameControls from './components/GameControls.vue'
 import HorseRoster from './components/HorseRoster.vue'
 import RaceTrack from './components/RaceTrack.vue'
-import ResultsPlaceholder from './components/ResultsPlaceholder.vue'
+import ResultsPanel from './components/ResultsPanel.vue'
 </script>
 
 <template>
@@ -14,7 +14,7 @@ import ResultsPlaceholder from './components/ResultsPlaceholder.vue'
     <RaceTrack />
   </div>
   <div class="col col-results">
-    <ResultsPlaceholder />
+    <ResultsPanel />
   </div>
 </template>
 
