@@ -101,8 +101,22 @@ const race = {
 
       commit('SET_INTERVAL_ID', _intervalRef);
     },
-    onRoundComplete({ commit, state, dispatch }) {
+    onRoundComplete({ commit, state, dispatch, rootState, rootGetters }) {
       dispatch('transitionTo', 'ROUND_COMPLETE');
+
+      // Derive finish order: sort horseIndices by condition descending (deterministic speed order)
+      const round = rootGetters['schedule/roundByNumber'](state.currentRound);
+      if (round) {
+        const finishOrder = [...round.horseIndices].sort((a, b) => {
+          return rootState.horses.list[b].condition - rootState.horses.list[a].condition;
+        });
+        dispatch('results/addRoundResult', {
+          roundNumber: round.roundNumber,
+          distance: round.distance,
+          finishOrder,
+        }, { root: true });
+      }
+
       setTimeout(() => {
         if (state.currentRound >= GAME_CONFIG.TOTAL_ROUNDS) {
           dispatch('transitionTo', 'DONE');

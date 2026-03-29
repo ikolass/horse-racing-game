@@ -11,6 +11,14 @@ const results = {
       state.rounds = [];
     },
   },
+  actions: {
+    addRoundResult({ commit }, result) {
+      commit('ADD_ROUND_RESULT', result);
+    },
+    clearResults({ commit }) {
+      commit('CLEAR_RESULTS');
+    },
+  },
   getters: {
     allResults: (state) => state.rounds,
     resultByRound: (state) => (num) => state.rounds.find(r => r.roundNumber === num),
