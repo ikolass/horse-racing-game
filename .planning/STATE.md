@@ -2,13 +2,13 @@
 gsd_state_version: 1.0
 milestone: v1.0
 milestone_name: milestone
-status: Executing Phase 04
-last_updated: "2026-03-29T18:11:30.694Z"
+status: Phase 04 Complete — ready for Phase 05
+last_updated: "2026-03-29T19:23:19.438Z"
 progress:
   total_phases: 5
-  completed_phases: 3
+  completed_phases: 4
   total_plans: 8
-  completed_plans: 7
+  completed_plans: 8
 ---
 
 # Project State / Proje Durumu
@@ -18,16 +18,16 @@ progress:
 See / Bkz: .planning/PROJECT.md (updated / güncelleme: 2026-03-28)
 
 **Core value / Temel değer:** Her yarış turu görsel olarak işleyen ve sonuçların sıralı görüntülendiği, eksiksiz oynanabilir bir at yarışı oyunu. / A complete, playable horse racing game where each race round runs visually and results appear sequentially.
-**Current focus / Mevcut odak:** Phase 1 — Foundation / Temel
+**Current focus / Mevcut odak:** Phase 5 — Tests
 
 ## Current Position / Mevcut Konum
 
-Phase / Faz: 4 of 5 (Results Panel — in progress)
-Plan: 04-01 complete
-Status / Durum: Phase 04 in progress — 04-01 done; race engine wired to results module
-Last activity / Son aktivite: 2026-03-29 — 04-01 complete: onRoundComplete dispatches finishOrder; Generate clears results; results.js actions added
+Phase / Faz: 5 of 5 (Tests — not started)
+Plan: 04-02 complete — Phase 4 complete
+Status / Durum: Phase 04 complete — ResultsPanel.vue built and integrated; all 4 phase success criteria verified
+Last activity / Son aktivite: 2026-03-29 — 04-02 complete: ResultsPanel.vue renders sequential round results with auto-scroll; App.vue swapped
 
-Progress / İlerleme: [█████████░] 88%
+Progress / İlerleme: [██████████] 100%
 
 ## Performance Metrics / Performans Metrikleri
 
@@ -54,6 +54,7 @@ Progress / İlerleme: [█████████░] 88%
 | Phase 02-roster-controls-ui P01 | 2 | 3 tasks | 5 files |
 | Phase 03-animated-race-track P01 | 2 | 3 tasks | 3 files |
 | Phase 04-results-panel P01 | 2 | 2 tasks | 3 files |
+| Phase 04-results-panel P02 | 10 | 3 tasks | 2 files |
 
 ## Accumulated Context / Birikmiş Bağlam
 
@@ -84,6 +85,8 @@ Recent decisions affecting current work:
 - 03-02: Horse markers stay at left: 100% during ROUND_COMPLETE — provides visual feedback before reset
 - 04-01: finishOrder derived by sorting horseIndices by condition descending (b-a) — deterministic, mirrors race engine speed formula
 - 04-01: results.js actions block added (addRoundResult + clearResults) — required for cross-module dispatch resolution in namespaced Vuex modules
+- 04-02: Auto-scroll uses watch(allResults.length) + await nextTick() before scrollTop = scrollHeight — synchronous scroll misses Vue batched DOM update
+- 04-02: data-testid attributes baked into ResultsPanel.vue now for Phase 5 Playwright E2E selectors (data-testid="results-panel" and data-testid="result-round-N")
 
 ### Pending Todos / Bekleyen Görevler
 
@@ -91,11 +94,12 @@ None yet / Henüz yok.
 
 ### Blockers/Concerns / Engelleyiciler/Endişeler
 
-- Phase 5: Playwright selectors need `data-testid` attributes on results/controls/round indicators; use 15s timeout (default 5s < animation duration)
+- Phase 5: Use 15s timeout for Playwright (default 5s < animation duration for 6 full rounds)
 - Note: Phase 3 CSS transition timing resolved — 45ms transition / 50ms tick works without calibration prototype
+- Note: data-testid="results-panel" and data-testid="result-round-N" are in place; data-testid on controls/round indicators TBD in Phase 5 plan
 
 ## Session Continuity / Oturum Sürekliliği
 
 Last session / Son oturum: 2026-03-29
-Stopped at / Durduğu yer: Completed 04-01-PLAN.md — race engine wired to results module; finishOrder dispatch; Generate clears results
-Resume file / Devam dosyası: N/A — next is 04-02 (ResultsPanel component)
+Stopped at / Durduğu yer: Completed 04-02-PLAN.md — ResultsPanel.vue built and integrated; Phase 4 complete
+Resume file / Devam dosyası: N/A — next is Phase 5 (Tests: Vitest unit + Playwright E2E)

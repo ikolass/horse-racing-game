@@ -17,7 +17,7 @@ Proje, tarayıcı tabanlı eksiksiz oynanabilir at yarışı oyununu beş fazda 
 - [ ] **Phase 1: Foundation** - Vuex store, data models, GAME_CONFIG, utility functions
 - [x] **Phase 2: Roster + Controls UI** - 20-horse roster display + Generate/Start button logic
 - [x] **Phase 3: Animated Race Track** - Race tick engine + CSS animation + round auto-advance
-- [ ] **Phase 4: Results Panel** - Sequential round results display + auto-scroll
+- [x] **Phase 4: Results Panel** - Sequential round results display + auto-scroll
 - [ ] **Phase 5: Tests** - Vitest unit tests + Playwright E2E coverage
 
 ---
@@ -103,10 +103,10 @@ Plans:
   3. Results accumulate in chronological order — Round 1 at top, Round 6 at bottom — with no rounds skipped or duplicated / Sonuçlar kronolojik sırayla birikir — Round 1 üstte, Round 6 altta — atlanan veya tekrarlanan tur yok
   4. The results panel automatically scrolls to bring the most recently added result into view / Sonuçlar paneli, en son eklenen sonucu görünüme getirmek için otomatik kayar
 
-**Plans:** 1/2 plans executed
+**Plans:** 2/2 plans executed
 Plans:
 - [x] 04-01-PLAN.md — Store wiring: finish order derivation in onRoundComplete + clear results on Generate
-- [ ] 04-02-PLAN.md — ResultsPanel.vue component + App.vue swap + visual verification
+- [x] 04-02-PLAN.md — ResultsPanel.vue component + App.vue swap + visual verification
 **UI hint**: yes
 
 ### Phase 5: Tests
@@ -137,7 +137,7 @@ Phases execute in numeric order: 1 → 2 → 3 → 4 → 5
 | 1. Foundation           | 2/2            | Complete          | -         |
 | 2. Roster + Controls UI | 2/2            | Complete          | 2026-03-28 |
 | 3. Animated Race Track  | 2/2 | Complete | 2026-03-29 |
-| 4. Results Panel        | 1/2 | In Progress|  |
+| 4. Results Panel        | 2/2 | Complete | 2026-03-29 |
 | 5. Tests                | 0/TBD          | Not started       | -         |
 
 ---
