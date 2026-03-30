@@ -34,8 +34,4 @@ import ResultsPanel from './components/ResultsPanel.vue'
 .col-track {
   border-right: 1px solid var(--color-divider);
 }
-
-.col-results {
-  /* no left border — track column has right border */
-}
 </style>

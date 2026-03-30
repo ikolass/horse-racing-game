@@ -33,9 +33,6 @@ function markerStyle(horseIdx) {
   }
 }
 
-
-
-// Track live finish order as horses cross the line
 const liveFinishOrder = ref([])
 
 watch(positions, (newPositions) => {
@@ -47,7 +44,6 @@ watch(positions, (newPositions) => {
   }
 })
 
-// Reset when a new round starts
 watch(gamePhase, (phase) => {
   if (phase === 'RACING') liveFinishOrder.value = []
 })

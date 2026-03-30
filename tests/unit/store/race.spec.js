@@ -41,14 +41,6 @@ describe('race module mutations', () => {
     expect(state.positions).toEqual({})
   })
 
-  it('SET_INTERVAL_ID stores the interval handle', () => {
-    const state = createRaceState()
-
-    race.mutations.SET_INTERVAL_ID(state, 123)
-
-    expect(state.intervalId).toBe(123)
-  })
-
   it('SET_ROUND_STARTED_AT stores the active round start timestamp', () => {
     const state = createRaceState()
 
@@ -111,13 +103,12 @@ describe('race module actions', () => {
 
     race.actions.resetRace({ commit })
 
-    expect(commit).toHaveBeenNthCalledWith(1, 'SET_INTERVAL_ID', null)
-    expect(commit).toHaveBeenNthCalledWith(2, 'RESET_POSITIONS')
-    expect(commit).toHaveBeenNthCalledWith(3, 'SET_CURRENT_ROUND', 0)
-    expect(commit).toHaveBeenNthCalledWith(4, 'SET_ROUND_STARTED_AT', null)
-    expect(commit).toHaveBeenNthCalledWith(5, 'SET_ROUND_FINISH_TIMES', {})
-    expect(commit).toHaveBeenNthCalledWith(6, 'SET_COUNTDOWN', 0)
-    expect(commit).toHaveBeenNthCalledWith(7, 'SET_GAME_PHASE', 'IDLE')
+    expect(commit).toHaveBeenNthCalledWith(1, 'RESET_POSITIONS')
+    expect(commit).toHaveBeenNthCalledWith(2, 'SET_CURRENT_ROUND', 0)
+    expect(commit).toHaveBeenNthCalledWith(3, 'SET_ROUND_STARTED_AT', null)
+    expect(commit).toHaveBeenNthCalledWith(4, 'SET_ROUND_FINISH_TIMES', {})
+    expect(commit).toHaveBeenNthCalledWith(5, 'SET_COUNTDOWN', 0)
+    expect(commit).toHaveBeenNthCalledWith(6, 'SET_GAME_PHASE', 'IDLE')
   })
 
   it('startRace sets round 1 and begins the countdown for the first round', () => {
@@ -152,12 +143,10 @@ describe('race module actions', () => {
 
   it('runRound initializes positions, advances them on timers, and dispatches onRoundComplete', () => {
     vi.spyOn(Date, 'now').mockReturnValue(1000)
+    const state = createRaceState()
     const commit = vi.fn((type, payload) => {
       if (type === 'SET_POSITIONS') {
         state.positions = payload
-      }
-      if (type === 'SET_INTERVAL_ID') {
-        state.intervalId = payload
       }
       if (type === 'SET_ROUND_STARTED_AT') {
         state.roundStartedAt = payload
@@ -167,7 +156,6 @@ describe('race module actions', () => {
       }
     })
     const dispatch = vi.fn()
-    const state = createRaceState()
     const rootState = {
       horses: horses.state(),
     }
@@ -178,7 +166,6 @@ describe('race module actions', () => {
     expect(commit).toHaveBeenCalledWith('SET_POSITIONS', { 0: 0, 8: 0 })
     expect(commit).toHaveBeenCalledWith('SET_ROUND_STARTED_AT', 1000)
     expect(commit).toHaveBeenCalledWith('SET_ROUND_FINISH_TIMES', {})
-    expect(commit).toHaveBeenCalledWith('SET_INTERVAL_ID', expect.anything())
 
     vi.advanceTimersByTime(GAME_CONFIG.TICK_INTERVAL_MS * 80)
 
@@ -186,7 +173,6 @@ describe('race module actions', () => {
     expect(state.positions[0]).toBe(1)
     expect(state.roundFinishTimes[8]).toBeGreaterThan(0)
     expect(state.roundFinishTimes[0]).toBeGreaterThan(0)
-    expect(commit).toHaveBeenCalledWith('SET_INTERVAL_ID', null)
     expect(dispatch).toHaveBeenCalledWith('onRoundComplete')
   })
 
@@ -215,13 +201,18 @@ describe('race module actions', () => {
     race.actions.onRoundComplete({ commit, state, dispatch, rootState, rootGetters })
 
     expect(dispatch).toHaveBeenNthCalledWith(1, 'transitionTo', 'ROUND_COMPLETE')
-    expect(dispatch).toHaveBeenNthCalledWith(2, 'results/addRoundResult', {
-      roundNumber: 1,
-      distance: 1200,
-      finishOrder: [8, 1, 4],
-      elapsedMs: 2200,
-      finishTimes: { 8: 1400, 1: 1800, 4: 2200 },
-    }, { root: true })
+    expect(dispatch).toHaveBeenNthCalledWith(
+      2,
+      'results/addRoundResult',
+      {
+        roundNumber: 1,
+        distance: 1200,
+        finishOrder: [8, 1, 4],
+        elapsedMs: 2200,
+        finishTimes: { 8: 1400, 1: 1800, 4: 2200 },
+      },
+      { root: true },
+    )
 
     vi.advanceTimersByTime(GAME_CONFIG.PAUSE_BETWEEN_ROUNDS_MS)
 
