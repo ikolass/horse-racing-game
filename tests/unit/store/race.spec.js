@@ -66,6 +66,30 @@ describe('race module mutations', () => {
   })
 })
 
+describe('race module getters', () => {
+  it('isRoundActive is true only when countdown is over and race is active', () => {
+    expect(race.getters.isRoundActive({ gamePhase: 'RACING', countdown: 0 })).toBe(true)
+    expect(race.getters.isRoundActive({ gamePhase: 'ROUND_COMPLETE', countdown: 0 })).toBe(true)
+    expect(race.getters.isRoundActive({ gamePhase: 'RACING', countdown: 2 })).toBe(false)
+    expect(race.getters.isRoundActive({ gamePhase: 'SCHEDULED', countdown: 0 })).toBe(false)
+  })
+
+  it('canGenerateSchedule blocks only during an active round or countdown', () => {
+    expect(race.getters.canGenerateSchedule({ countdown: 0 }, { isRoundActive: false })).toBe(true)
+    expect(race.getters.canGenerateSchedule({ countdown: 0 }, { isRoundActive: true })).toBe(false)
+    expect(race.getters.canGenerateSchedule({ countdown: 2 }, { isRoundActive: false })).toBe(false)
+  })
+
+  it('canStartRace allows only scheduled idle-between-round states without countdown', () => {
+    expect(race.getters.canStartRace({ gamePhase: 'SCHEDULED', countdown: 0 })).toBe(true)
+    expect(race.getters.canStartRace({ gamePhase: 'IDLE', countdown: 0 })).toBe(false)
+    expect(race.getters.canStartRace({ gamePhase: 'DONE', countdown: 0 })).toBe(false)
+    expect(race.getters.canStartRace({ gamePhase: 'RACING', countdown: 0 })).toBe(false)
+    expect(race.getters.canStartRace({ gamePhase: 'ROUND_COMPLETE', countdown: 0 })).toBe(false)
+    expect(race.getters.canStartRace({ gamePhase: 'SCHEDULED', countdown: 1 })).toBe(false)
+  })
+})
+
 describe('race module actions', () => {
   beforeEach(() => {
     vi.useFakeTimers()
@@ -104,10 +128,10 @@ describe('race module actions', () => {
     race.actions.resetRace({ commit })
 
     expect(commit).toHaveBeenNthCalledWith(1, 'RESET_POSITIONS')
-    expect(commit).toHaveBeenNthCalledWith(2, 'SET_CURRENT_ROUND', 0)
-    expect(commit).toHaveBeenNthCalledWith(3, 'SET_ROUND_STARTED_AT', null)
-    expect(commit).toHaveBeenNthCalledWith(4, 'SET_ROUND_FINISH_TIMES', {})
-    expect(commit).toHaveBeenNthCalledWith(5, 'SET_COUNTDOWN', 0)
+    expect(commit).toHaveBeenNthCalledWith(2, 'SET_ROUND_STARTED_AT', null)
+    expect(commit).toHaveBeenNthCalledWith(3, 'SET_ROUND_FINISH_TIMES', {})
+    expect(commit).toHaveBeenNthCalledWith(4, 'SET_COUNTDOWN', 0)
+    expect(commit).toHaveBeenNthCalledWith(5, 'SET_CURRENT_ROUND', 0)
     expect(commit).toHaveBeenNthCalledWith(6, 'SET_GAME_PHASE', 'IDLE')
   })
 
@@ -217,9 +241,9 @@ describe('race module actions', () => {
     vi.advanceTimersByTime(GAME_CONFIG.PAUSE_BETWEEN_ROUNDS_MS)
 
     expect(commit).toHaveBeenCalledWith('RESET_POSITIONS')
-    expect(commit).toHaveBeenCalledWith('SET_CURRENT_ROUND', 2)
     expect(commit).toHaveBeenCalledWith('SET_ROUND_STARTED_AT', null)
     expect(commit).toHaveBeenCalledWith('SET_ROUND_FINISH_TIMES', {})
+    expect(commit).toHaveBeenCalledWith('SET_CURRENT_ROUND', 2)
     expect(dispatch).toHaveBeenCalledWith('startRoundCountdown', 2)
   })
 
@@ -251,7 +275,7 @@ describe('race module actions', () => {
     expect(commit).toHaveBeenCalledWith('SET_ROUND_STARTED_AT', null)
     expect(commit).toHaveBeenCalledWith('SET_ROUND_FINISH_TIMES', {})
     expect(dispatch).toHaveBeenCalledWith('transitionTo', 'DONE')
-    expect(dispatch).not.toHaveBeenCalledWith('startRoundByNumber', expect.anything())
+    expect(dispatch).not.toHaveBeenCalledWith('startRoundCountdown', expect.anything())
   })
 
   it('startRoundByNumber dispatches runRound for the requested round', () => {

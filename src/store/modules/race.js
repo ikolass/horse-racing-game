@@ -8,9 +8,41 @@ const VALID_TRANSITIONS = {
   DONE: ['IDLE'],
 }
 
+const ACTIVE_RACE_PHASES = new Set(['RACING', 'ROUND_COMPLETE'])
+
 let _intervalRef = null
 let _betweenRoundsTimeoutRef = null
 let _countdownIntervalRef = null
+
+function clearRaceTimers() {
+  if (_intervalRef) {
+    clearInterval(_intervalRef)
+    _intervalRef = null
+  }
+  if (_betweenRoundsTimeoutRef) {
+    clearTimeout(_betweenRoundsTimeoutRef)
+    _betweenRoundsTimeoutRef = null
+  }
+  if (_countdownIntervalRef) {
+    clearInterval(_countdownIntervalRef)
+    _countdownIntervalRef = null
+  }
+}
+
+function resetRoundState(commit, { resetPositions = false, resetCountdown = false } = {}) {
+  if (resetPositions) {
+    commit('RESET_POSITIONS')
+  }
+  commit('SET_ROUND_STARTED_AT', null)
+  commit('SET_ROUND_FINISH_TIMES', {})
+  if (resetCountdown) {
+    commit('SET_COUNTDOWN', 0)
+  }
+}
+
+function isRoundActivePhase(phase) {
+  return ACTIVE_RACE_PHASES.has(phase)
+}
 
 const race = {
   namespaced: true,
@@ -56,23 +88,9 @@ const race = {
       return true
     },
     resetRace({ commit }) {
-      if (_intervalRef) {
-        clearInterval(_intervalRef)
-        _intervalRef = null
-      }
-      if (_betweenRoundsTimeoutRef) {
-        clearTimeout(_betweenRoundsTimeoutRef)
-        _betweenRoundsTimeoutRef = null
-      }
-      if (_countdownIntervalRef) {
-        clearInterval(_countdownIntervalRef)
-        _countdownIntervalRef = null
-      }
-      commit('RESET_POSITIONS')
+      clearRaceTimers()
+      resetRoundState(commit, { resetPositions: true, resetCountdown: true })
       commit('SET_CURRENT_ROUND', 0)
-      commit('SET_ROUND_STARTED_AT', null)
-      commit('SET_ROUND_FINISH_TIMES', {})
-      commit('SET_COUNTDOWN', 0)
       commit('SET_GAME_PHASE', 'IDLE')
     },
     startRace({ commit, dispatch }) {
@@ -108,16 +126,10 @@ const race = {
 
       const horses = horseIndices.map((idx) => rootState.horses.list[idx])
       const maxCondition = Math.max(...horses.map((horse) => horse.condition))
-      const speeds = {}
-
-      horseIndices.forEach((idx, i) => {
-        speeds[idx] = horses[i].condition / (maxCondition * GAME_CONFIG.TICKS_TO_WIN)
-      })
-
-      const initialPositions = {}
-      horseIndices.forEach((idx) => {
-        initialPositions[idx] = 0
-      })
+      const speeds = Object.fromEntries(
+        horseIndices.map((idx, i) => [idx, horses[i].condition / (maxCondition * GAME_CONFIG.TICKS_TO_WIN)]),
+      )
+      const initialPositions = Object.fromEntries(horseIndices.map((idx) => [idx, 0]))
 
       commit('SET_POSITIONS', initialPositions)
       commit('SET_ROUND_STARTED_AT', Date.now())
@@ -178,16 +190,12 @@ const race = {
 
       _betweenRoundsTimeoutRef = setTimeout(() => {
         _betweenRoundsTimeoutRef = null
+        resetRoundState(commit, { resetPositions: state.currentRound < GAME_CONFIG.TOTAL_ROUNDS })
         if (state.currentRound >= GAME_CONFIG.TOTAL_ROUNDS) {
-          commit('SET_ROUND_STARTED_AT', null)
-          commit('SET_ROUND_FINISH_TIMES', {})
           dispatch('transitionTo', 'DONE')
         } else {
           const nextRound = state.currentRound + 1
-          commit('RESET_POSITIONS')
           commit('SET_CURRENT_ROUND', nextRound)
-          commit('SET_ROUND_STARTED_AT', null)
-          commit('SET_ROUND_FINISH_TIMES', {})
           dispatch('startRoundCountdown', nextRound)
         }
       }, GAME_CONFIG.PAUSE_BETWEEN_ROUNDS_MS)
@@ -203,6 +211,13 @@ const race = {
     gamePhase: (state) => state.gamePhase,
     currentRound: (state) => state.currentRound,
     countdown: (state) => state.countdown,
+    isRoundActive: (state) => state.countdown === 0 && isRoundActivePhase(state.gamePhase),
+    canGenerateSchedule: (state, getters) => !getters.isRoundActive && state.countdown === 0,
+    canStartRace: (state) =>
+      state.gamePhase !== 'IDLE' &&
+      state.gamePhase !== 'DONE' &&
+      !isRoundActivePhase(state.gamePhase) &&
+      state.countdown === 0,
   },
 }
 

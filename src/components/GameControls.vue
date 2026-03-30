@@ -20,19 +20,13 @@
 </template>
 
 <script setup>
-import { useStore } from 'vuex'
 import { computed } from 'vue'
+import { useStore } from 'vuex'
 
 const store = useStore()
-const gamePhase = computed(() => store.getters['race/gamePhase'])
-const countdown = computed(() => store.getters['race/countdown'])
 
-const generateDisabled = computed(() =>
-  gamePhase.value === 'RACING' || gamePhase.value === 'ROUND_COMPLETE' || countdown.value > 0
-)
-const startDisabled = computed(() =>
-  gamePhase.value === 'IDLE' || gamePhase.value === 'RACING' || gamePhase.value === 'ROUND_COMPLETE' || gamePhase.value === 'DONE' || countdown.value > 0
-)
+const generateDisabled = computed(() => !store.getters['race/canGenerateSchedule'])
+const startDisabled = computed(() => !store.getters['race/canStartRace'])
 
 function handleGenerate() {
   store.dispatch('race/resetRace')

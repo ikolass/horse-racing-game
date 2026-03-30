@@ -12,4 +12,4 @@ export const GAME_CONFIG = Object.freeze({
   TICKS_TO_WIN: isE2EMode ? 10 : 60,
   PAUSE_BETWEEN_ROUNDS_MS: isE2EMode ? 50 : 1500,
   COUNTDOWN_TICK_MS: isE2EMode ? 50 : 1000,
-});
+})

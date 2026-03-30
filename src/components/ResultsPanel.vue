@@ -7,74 +7,61 @@ const allResults = computed(() => store.getters['results/allResults'])
 const allRounds = computed(() => store.getters['schedule/allRounds'])
 const allHorses = computed(() => store.getters['horses/allHorses'])
 const currentRound = computed(() => store.getters['race/currentRound'])
-const gamePhase = computed(() => store.getters['race/gamePhase'])
-const countdown = computed(() => store.getters['race/countdown'])
+const isRoundActive = computed(() => store.getters['race/isRoundActive'])
 const roundFinishTimes = computed(() => store.state.race.roundFinishTimes)
 
-const resultsByRound = computed(() => {
-  return allResults.value.reduce((map, result) => {
+const resultsByRound = computed(() =>
+  allResults.value.reduce((map, result) => {
     map[result.roundNumber] = result
     return map
-  }, {})
-})
+  }, {}),
+)
 
 function formatElapsed(ms) {
   return `${(ms / 1000).toFixed(2)} sn`
 }
 
-function horseElapsed(result, horseIdx) {
-  return formatElapsed(result.finishTimes?.[horseIdx] ?? 0)
-}
-
-const liveResultsByRound = computed(() => {
-  const roundNumber = currentRound.value
-  if (!roundNumber || gamePhase.value === 'SCHEDULED' || gamePhase.value === 'IDLE') {
-    return {}
-  }
-
-  const round = allRounds.value.find((entry) => entry.roundNumber === roundNumber)
-  if (!round) return {}
-
+function buildLiveResult(round) {
   const finishOrder = [...round.horseIndices]
     .filter((horseIdx) => roundFinishTimes.value[horseIdx] !== undefined)
     .sort((a, b) => roundFinishTimes.value[a] - roundFinishTimes.value[b])
 
-  if (finishOrder.length === 0) return {}
+  if (finishOrder.length === 0) {
+    return null
+  }
 
   return {
-    [roundNumber]: {
-      roundNumber,
-      distance: round.distance,
-      finishOrder,
-      finishTimes: roundFinishTimes.value,
-      elapsedMs: Math.max(...Object.values(roundFinishTimes.value)),
-      live: true,
-    },
+    roundNumber: round.roundNumber,
+    distance: round.distance,
+    finishOrder,
+    finishTimes: roundFinishTimes.value,
+    elapsedMs: Math.max(...Object.values(roundFinishTimes.value)),
   }
-})
-
-function displayResult(roundNumber) {
-  return resultsByRound.value[roundNumber] ?? liveResultsByRound.value[roundNumber] ?? null
 }
 
-function resultCardLabel(roundNumber) {
-  if (resultsByRound.value[roundNumber]) return 'Finished'
-  if (
-    currentRound.value === roundNumber &&
-    countdown.value === 0 &&
-    (gamePhase.value === 'RACING' || gamePhase.value === 'ROUND_COMPLETE')
-  ) {
-    return 'Racing'
-  }
-  return 'Pending'
-}
+const roundCards = computed(() =>
+  allRounds.value.map((round) => {
+    const savedResult = resultsByRound.value[round.roundNumber] ?? null
+    const liveResult =
+      !savedResult && currentRound.value === round.roundNumber && isRoundActive.value
+        ? buildLiveResult(round)
+        : null
+    const displayResult = savedResult ?? liveResult
+    const heading = `Round ${round.roundNumber} - ${round.distance}m`
+    const active = currentRound.value === round.roundNumber && isRoundActive.value
 
-function isRoundActive(roundNumber) {
-  return (
-    currentRound.value === roundNumber &&
-    countdown.value === 0 &&
-    (gamePhase.value === 'RACING' || gamePhase.value === 'ROUND_COMPLETE')
-  )
+    return {
+      ...round,
+      active,
+      heading,
+      label: savedResult ? 'Finished' : active ? 'Racing' : 'Pending',
+      displayResult,
+    }
+  }),
+)
+
+function horseElapsed(result, horseIdx) {
+  return formatElapsed(result.finishTimes?.[horseIdx] ?? 0)
 }
 </script>
 
@@ -83,22 +70,20 @@ function isRoundActive(roundNumber) {
     <div class="panel-header">Results</div>
 
     <div class="results-scroll">
-      <div v-if="allRounds.length === 0" class="empty-state">
+      <div v-if="roundCards.length === 0" class="empty-state">
         No schedule yet. Generate a schedule to preview each round.
       </div>
 
       <div v-else class="rounds-list">
         <div
-          v-for="round in allRounds"
+          v-for="round in roundCards"
           :key="round.roundNumber"
           class="round-row"
           :data-testid="`round-row-${round.roundNumber}`"
         >
           <section class="info-card schedule-card" :data-testid="`schedule-round-${round.roundNumber}`">
             <div class="card-label">Scheduled</div>
-            <div class="card-heading">
-              Round {{ round.roundNumber }} &#8212; {{ round.distance }}m
-            </div>
+            <div class="card-heading">{{ round.heading }}</div>
             <ol class="horse-list">
               <li
                 v-for="horseIdx in round.horseIndices"
@@ -115,19 +100,17 @@ function isRoundActive(roundNumber) {
           </section>
 
           <section class="info-card result-card" :data-testid="`result-round-${round.roundNumber}`">
-            <div class="card-label">{{ resultCardLabel(round.roundNumber) }}</div>
-            <template v-if="displayResult(round.roundNumber)">
+            <div class="card-label">{{ round.label }}</div>
+            <template v-if="round.displayResult">
               <div class="card-header-row">
-                <div class="card-heading">
-                  Round {{ round.roundNumber }} &#8212; {{ round.distance }}m
-                </div>
+                <div class="card-heading">{{ round.heading }}</div>
                 <div class="result-timer" :data-testid="`result-time-${round.roundNumber}`">
-                  {{ formatElapsed(displayResult(round.roundNumber).elapsedMs ?? 0) }}
+                  {{ formatElapsed(round.displayResult.elapsedMs ?? 0) }}
                 </div>
               </div>
               <ol class="horse-list">
                 <li
-                  v-for="(horseIdx, place) in displayResult(round.roundNumber).finishOrder"
+                  v-for="(horseIdx, place) in round.displayResult.finishOrder"
                   :key="horseIdx"
                   class="horse-row"
                 >
@@ -137,24 +120,20 @@ function isRoundActive(roundNumber) {
                     :style="{ backgroundColor: allHorses[horseIdx].color }"
                   ></span>
                   <span class="horse-name">{{ allHorses[horseIdx].name }}</span>
-                  <span class="horse-time">{{ horseElapsed(displayResult(round.roundNumber), horseIdx) }}</span>
+                  <span class="horse-time">{{ horseElapsed(round.displayResult, horseIdx) }}</span>
                 </li>
               </ol>
             </template>
 
-            <template v-else-if="isRoundActive(round.roundNumber)">
-              <div class="card-heading">
-                Round {{ round.roundNumber }} &#8212; {{ round.distance }}m
-              </div>
+            <template v-else-if="round.active">
+              <div class="card-heading">{{ round.heading }}</div>
               <div class="pending-state">
                 Race is in progress. Finishers will appear here as they complete the round.
               </div>
             </template>
 
             <template v-else>
-              <div class="card-heading">
-                Round {{ round.roundNumber }} &#8212; {{ round.distance }}m
-              </div>
+              <div class="card-heading">{{ round.heading }}</div>
               <div class="pending-state">
                 This card will fill after Round {{ round.roundNumber }} starts.
               </div>

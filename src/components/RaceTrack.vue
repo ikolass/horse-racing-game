@@ -89,7 +89,7 @@ const hasSchedule = computed(() => !!visibleRound.value)
                 class="marker-icon"
                 :class="{ 'marker-icon-running': gamePhase === 'RACING' && (positions[horse.idx] ?? 0) < 1 }"
                 aria-hidden="true"
-              >🐎</span>
+              >&#128014;</span>
             </div>
           </div>
         </div>

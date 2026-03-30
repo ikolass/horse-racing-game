@@ -1,8 +1,8 @@
-import { createStore } from 'vuex';
-import horses from './modules/horses.js';
-import schedule from './modules/schedule.js';
-import race from './modules/race.js';
-import results from './modules/results.js';
+import { createStore } from 'vuex'
+import horses from './modules/horses.js'
+import schedule from './modules/schedule.js'
+import race from './modules/race.js'
+import results from './modules/results.js'
 
 const store = createStore({
   modules: {
@@ -11,6 +11,6 @@ const store = createStore({
     race,
     results,
   },
-});
+})
 
-export default store;
+export default store
