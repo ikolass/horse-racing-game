@@ -3,37 +3,35 @@ import { computed } from 'vue'
 import { useStore } from 'vuex'
 
 const store = useStore()
+const MARKER_SIZE = 30
+const FINISH_LINE_WIDTH = 2
 
-const gamePhase = computed(() => store.getters['race/gamePhase'])
 const currentRound = computed(() => store.getters['race/currentRound'])
+const countdown = computed(() => store.getters['race/countdown'])
 const positions = computed(() => store.state.race.positions)
 const allHorses = computed(() => store.getters['horses/allHorses'])
 
-// The round to display: current round if set, otherwise round 1 (for SCHEDULED state)
 const visibleRound = computed(() => {
   const roundNum = currentRound.value || 1
   return store.getters['schedule/roundByNumber'](roundNum) ?? null
 })
 
-// Map horse indices to full horse objects with their index attached
 const racingHorses = computed(() => {
   if (!visibleRound.value) return []
-  return visibleRound.value.horseIndices.map(idx => ({
+  return visibleRound.value.horseIndices.map((idx) => ({
     idx,
     ...allHorses.value[idx],
   }))
 })
 
-// Returns marker style: at finish line (right-anchored) or in-track (left-anchored)
 function markerStyle(horseIdx) {
   const pos = positions.value[horseIdx] ?? 0
-  if (pos >= 1.0) {
-    return { right: '4px', left: 'auto' }
+  const normalized = Math.min(Math.max(pos, 0), 1)
+  return {
+    left: `calc(${normalized * 100}% - ${normalized * MARKER_SIZE}px - ${normalized * FINISH_LINE_WIDTH}px)`,
   }
-  return { left: (pos * 100) + '%' }
 }
 
-// Whether a schedule exists (controls empty state vs track display)
 const hasSchedule = computed(() => !!visibleRound.value)
 </script>
 
@@ -44,6 +42,9 @@ const hasSchedule = computed(() => !!visibleRound.value)
         Round {{ visibleRound.roundNumber }} &#8212; {{ visibleRound.distance }}m
       </div>
       <div class="track-container">
+        <div v-if="countdown > 0" class="countdown-overlay" data-testid="round-countdown">
+          <span class="countdown-value">{{ countdown }}</span>
+        </div>
         <div
           v-for="(horse, i) in racingHorses"
           :key="horse.idx"
@@ -51,10 +52,6 @@ const hasSchedule = computed(() => !!visibleRound.value)
           :class="i % 2 === 0 ? 'lane-odd' : 'lane-even'"
           :data-testid="`lane-${horse.idx}`"
         >
-          <div class="lane-label">
-            <span class="swatch" :style="{ backgroundColor: horse.color }"></span>
-            <span class="lane-name">{{ horse.name }}</span>
-          </div>
           <div class="track-area">
             <div class="finish-line" data-testid="finish-line"></div>
             <div
@@ -62,9 +59,20 @@ const hasSchedule = computed(() => !!visibleRound.value)
               :data-testid="`marker-${horse.idx}`"
               :style="markerStyle(horse.idx)"
             >
-              <span class="marker-swatch" :style="{ backgroundColor: horse.color }"></span>
+              <span
+                class="marker-icon"
+                :style="{ backgroundColor: horse.color }"
+                aria-hidden="true"
+              >
+                <svg viewBox="0 0 64 64" class="marker-icon-svg" focusable="false">
+                  <path
+                    d="M14 38c0-6 5-11 11-11h4l5-8 8 3-3 6 6 3c3 1 5 5 5 8v8h-5v-6h-6l-2 11h-5l1-11h-6l-2 11h-5l1-12c-4-1-7-5-7-10Z"
+                    fill="currentColor"
+                  />
+                  <circle cx="43" cy="24" r="2" fill="var(--color-bg-dominant)" />
+                </svg>
+              </span>
               <span class="marker-name">{{ horse.name }}</span>
-              <span class="marker-badge">{{ horse.condition }}</span>
             </div>
           </div>
         </div>
@@ -103,6 +111,7 @@ const hasSchedule = computed(() => !!visibleRound.value)
   display: flex;
   flex-direction: column;
   height: 400px;
+  position: relative;
 }
 
 .lane {
@@ -118,32 +127,6 @@ const hasSchedule = computed(() => !!visibleRound.value)
 
 .lane-even {
   background: var(--color-bg-secondary);
-}
-
-.lane-label {
-  width: 120px;
-  flex-shrink: 0;
-  display: flex;
-  align-items: center;
-  gap: var(--space-xs);
-  padding: 0 var(--space-sm);
-  overflow: hidden;
-}
-
-.swatch {
-  width: 12px;
-  height: 12px;
-  border-radius: 2px;
-  flex-shrink: 0;
-}
-
-.lane-name {
-  font-size: var(--font-body);
-  font-weight: var(--font-weight-regular);
-  color: var(--color-text-primary);
-  overflow: hidden;
-  text-overflow: ellipsis;
-  white-space: nowrap;
 }
 
 .track-area {
@@ -166,32 +149,61 @@ const hasSchedule = computed(() => !!visibleRound.value)
   top: 50%;
   transform: translateY(-50%);
   transition: left 45ms linear;
+  z-index: 1;
   display: flex;
   align-items: center;
-  gap: var(--space-xs);
-  white-space: nowrap;
+  gap: 8px;
 }
 
-.marker-swatch {
-  width: 12px;
-  height: 12px;
-  border-radius: 2px;
-  flex-shrink: 0;
+.marker-icon {
+  width: 30px;
+  height: 30px;
+  border-radius: 999px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #ffffff;
+  box-shadow: inset 0 0 0 1px rgba(255, 255, 255, 0.35);
+  filter: drop-shadow(0 3px 4px rgba(0, 0, 0, 0.2));
+}
+
+.marker-icon-svg {
+  width: 22px;
+  height: 22px;
 }
 
 .marker-name {
-  font-size: var(--font-body);
-  font-weight: var(--font-weight-regular);
-  color: var(--color-text-primary);
-}
-
-.marker-badge {
   font-size: var(--font-label);
   font-weight: var(--font-weight-semibold);
   color: var(--color-text-primary);
-  background: var(--color-badge-bg);
-  padding: var(--space-xs) var(--space-sm);
-  border-radius: 4px;
+  white-space: nowrap;
+  text-shadow: 0 1px 2px rgba(0, 0, 0, 0.35);
+}
+
+.countdown-overlay {
+  position: absolute;
+  inset: 0;
+  z-index: 4;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: rgba(8, 12, 20, 0.28);
+  pointer-events: none;
+}
+
+.countdown-value {
+  min-width: 88px;
+  min-height: 88px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 999px;
+  background: rgba(11, 18, 32, 0.82);
+  color: #ffffff;
+  font-size: 44px;
+  font-weight: 800;
+  line-height: 1;
+  box-shadow: 0 18px 40px rgba(0, 0, 0, 0.25);
 }
 
 .empty-state {

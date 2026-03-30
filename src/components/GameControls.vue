@@ -25,15 +25,17 @@ import { computed } from 'vue'
 
 const store = useStore()
 const gamePhase = computed(() => store.getters['race/gamePhase'])
+const countdown = computed(() => store.getters['race/countdown'])
 
 const generateDisabled = computed(() =>
-  gamePhase.value === 'RACING' || gamePhase.value === 'ROUND_COMPLETE'
+  gamePhase.value === 'RACING' || gamePhase.value === 'ROUND_COMPLETE' || countdown.value > 0
 )
 const startDisabled = computed(() =>
-  gamePhase.value === 'IDLE' || gamePhase.value === 'RACING' || gamePhase.value === 'ROUND_COMPLETE' || gamePhase.value === 'DONE'
+  gamePhase.value === 'IDLE' || gamePhase.value === 'RACING' || gamePhase.value === 'ROUND_COMPLETE' || gamePhase.value === 'DONE' || countdown.value > 0
 )
 
 function handleGenerate() {
+  store.dispatch('race/resetRace')
   store.dispatch('schedule/generateSchedule')
   store.dispatch('race/transitionTo', 'SCHEDULED')
   store.dispatch('results/clearResults')
