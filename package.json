@@ -6,13 +6,18 @@
   "scripts": {
     "dev": "vite",
     "build": "vite build",
-    "preview": "vite preview"
+    "preview": "vite preview",
+    "test": "vitest run",
+    "test:watch": "vitest",
+    "test:run": "vitest run",
+    "test:e2e": "playwright test"
   },
   "dependencies": {
     "vue": "^3.5.30",
     "vuex": "^4.1.0"
   },
   "devDependencies": {
+    "@playwright/test": "^1.54.2",
     "@vitejs/plugin-vue": "^6.0.4",
     "vite": "^7.3.1",
     "vite-plugin-vue-devtools": "^8.0.7",

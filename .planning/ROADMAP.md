@@ -18,7 +18,7 @@ Proje, tarayıcı tabanlı eksiksiz oynanabilir at yarışı oyununu beş fazda 
 - [x] **Phase 2: Roster + Controls UI** - 20-horse roster display + Generate/Start button logic
 - [x] **Phase 3: Animated Race Track** - Race tick engine + CSS animation + round auto-advance
 - [x] **Phase 4: Results Panel** - Sequential round results display + auto-scroll
-- [ ] **Phase 5: Tests** - Vitest unit tests + Playwright E2E coverage
+- [x] **Phase 5: Tests** - Vitest unit tests + Playwright E2E coverage
 
 ---
 
@@ -123,7 +123,11 @@ Plans:
   2. The fairness test passes: in a 50-race simulation, the horse with the highest condition score finishes in the top 3 in more than 60% of races, confirming condition score meaningfully influences outcome / Adillik testi geçer: 50 yarış simülasyonunda en yüksek kondisyonlu at 50 yarışın %60'ından fazlasında ilk 3'te bitirir
   3. `npx playwright test` passes: the E2E test opens the app, clicks Generate, clicks Start, waits for all 6 rounds to complete, and asserts that 6 round result entries are visible in the Results panel / `npx playwright test` geçer: E2E testi uygulamayı açar, Generate'e tıklar, Start'a tıklar, 6 turun tamamlanmasını bekler ve Sonuçlar panelinde 6 tur sonuç girdisinin görünür olduğunu doğrular
 
-**Plans**: TBD
+**Plans:** 3/3 plans executed
+Plans:
+- [x] 05-01-PLAN.md â€” Vitest/Playwright infrastructure + shared store test helper
+- [x] 05-02-PLAN.md â€” Vuex unit coverage + race-engine fairness test
+- [x] 05-03-PLAN.md â€” Playwright full-flow regression + visual approval checkpoint
 
 ---
 
@@ -138,7 +142,7 @@ Phases execute in numeric order: 1 → 2 → 3 → 4 → 5
 | 2. Roster + Controls UI | 2/2            | Complete          | 2026-03-28 |
 | 3. Animated Race Track  | 2/2 | Complete | 2026-03-29 |
 | 4. Results Panel        | 2/2 | Complete | 2026-03-29 |
-| 5. Tests                | 0/TBD          | Not started       | -         |
+| 5. Tests                | 3/3            | Complete          | 2026-03-30 |
 
 ---
 
