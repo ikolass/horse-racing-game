@@ -8,6 +8,7 @@ const allRounds = computed(() => store.getters['schedule/allRounds'])
 const allHorses = computed(() => store.getters['horses/allHorses'])
 const currentRound = computed(() => store.getters['race/currentRound'])
 const gamePhase = computed(() => store.getters['race/gamePhase'])
+const countdown = computed(() => store.getters['race/countdown'])
 const roundFinishTimes = computed(() => store.state.race.roundFinishTimes)
 
 const resultsByRound = computed(() => {
@@ -55,6 +56,26 @@ const liveResultsByRound = computed(() => {
 function displayResult(roundNumber) {
   return resultsByRound.value[roundNumber] ?? liveResultsByRound.value[roundNumber] ?? null
 }
+
+function resultCardLabel(roundNumber) {
+  if (resultsByRound.value[roundNumber]) return 'Finished'
+  if (
+    currentRound.value === roundNumber &&
+    countdown.value === 0 &&
+    (gamePhase.value === 'RACING' || gamePhase.value === 'ROUND_COMPLETE')
+  ) {
+    return 'Racing'
+  }
+  return 'Pending'
+}
+
+function isRoundActive(roundNumber) {
+  return (
+    currentRound.value === roundNumber &&
+    countdown.value === 0 &&
+    (gamePhase.value === 'RACING' || gamePhase.value === 'ROUND_COMPLETE')
+  )
+}
 </script>
 
 <template>
@@ -94,8 +115,8 @@ function displayResult(roundNumber) {
           </section>
 
           <section class="info-card result-card" :data-testid="`result-round-${round.roundNumber}`">
+            <div class="card-label">{{ resultCardLabel(round.roundNumber) }}</div>
             <template v-if="displayResult(round.roundNumber)">
-              <div class="card-label">{{ displayResult(round.roundNumber).live ? 'Live' : 'Finished' }}</div>
               <div class="card-header-row">
                 <div class="card-heading">
                   Round {{ round.roundNumber }} &#8212; {{ round.distance }}m
@@ -121,13 +142,21 @@ function displayResult(roundNumber) {
               </ol>
             </template>
 
-            <template v-else>
-              <div class="card-label">Pending</div>
+            <template v-else-if="isRoundActive(round.roundNumber)">
               <div class="card-heading">
                 Round {{ round.roundNumber }} &#8212; {{ round.distance }}m
               </div>
               <div class="pending-state">
-                This card will fill after Round {{ round.roundNumber }} finishes.
+                Race is in progress. Finishers will appear here as they complete the round.
+              </div>
+            </template>
+
+            <template v-else>
+              <div class="card-heading">
+                Round {{ round.roundNumber }} &#8212; {{ round.distance }}m
+              </div>
+              <div class="pending-state">
+                This card will fill after Round {{ round.roundNumber }} starts.
               </div>
             </template>
           </section>
