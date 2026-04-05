@@ -25,7 +25,9 @@ import { useStore } from 'vuex'
 
 const store = useStore()
 
-const generateDisabled = computed(() => !store.getters['race/canGenerateSchedule'])
+const generateDisabled = computed(
+  () => !store.getters['race/canGenerateSchedule']
+)
 const startDisabled = computed(() => !store.getters['race/canStartRace'])
 
 function handleGenerate() {

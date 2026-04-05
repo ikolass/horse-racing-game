@@ -14,7 +14,7 @@ const resultsByRound = computed(() =>
   allResults.value.reduce((map, result) => {
     map[result.roundNumber] = result
     return map
-  }, {}),
+  }, {})
 )
 
 function formatElapsed(ms) {
@@ -43,12 +43,15 @@ const roundCards = computed(() =>
   allRounds.value.map((round) => {
     const savedResult = resultsByRound.value[round.roundNumber] ?? null
     const liveResult =
-      !savedResult && currentRound.value === round.roundNumber && isRoundActive.value
+      !savedResult &&
+      currentRound.value === round.roundNumber &&
+      isRoundActive.value
         ? buildLiveResult(round)
         : null
     const displayResult = savedResult ?? liveResult
     const heading = `Round ${round.roundNumber} - ${round.distance}m`
-    const active = currentRound.value === round.roundNumber && isRoundActive.value
+    const active =
+      currentRound.value === round.roundNumber && isRoundActive.value
 
     return {
       ...round,
@@ -57,7 +60,7 @@ const roundCards = computed(() =>
       label: savedResult ? 'Finished' : active ? 'Racing' : 'Pending',
       displayResult,
     }
-  }),
+  })
 )
 
 function horseElapsed(result, horseIdx) {
@@ -81,7 +84,10 @@ function horseElapsed(result, horseIdx) {
           class="round-row"
           :data-testid="`round-row-${round.roundNumber}`"
         >
-          <section class="info-card schedule-card" :data-testid="`schedule-round-${round.roundNumber}`">
+          <section
+            class="info-card schedule-card"
+            :data-testid="`schedule-round-${round.roundNumber}`"
+          >
             <div class="card-label">Scheduled</div>
             <div class="card-heading">{{ round.heading }}</div>
             <ol class="horse-list">
@@ -99,12 +105,18 @@ function horseElapsed(result, horseIdx) {
             </ol>
           </section>
 
-          <section class="info-card result-card" :data-testid="`result-round-${round.roundNumber}`">
+          <section
+            class="info-card result-card"
+            :data-testid="`result-round-${round.roundNumber}`"
+          >
             <div class="card-label">{{ round.label }}</div>
             <template v-if="round.displayResult">
               <div class="card-header-row">
                 <div class="card-heading">{{ round.heading }}</div>
-                <div class="result-timer" :data-testid="`result-time-${round.roundNumber}`">
+                <div
+                  class="result-timer"
+                  :data-testid="`result-time-${round.roundNumber}`"
+                >
                   {{ formatElapsed(round.displayResult.elapsedMs ?? 0) }}
                 </div>
               </div>
@@ -120,7 +132,9 @@ function horseElapsed(result, horseIdx) {
                     :style="{ backgroundColor: allHorses[horseIdx].color }"
                   ></span>
                   <span class="horse-name">{{ allHorses[horseIdx].name }}</span>
-                  <span class="horse-time">{{ horseElapsed(round.displayResult, horseIdx) }}</span>
+                  <span class="horse-time">{{
+                    horseElapsed(round.displayResult, horseIdx)
+                  }}</span>
                 </li>
               </ol>
             </template>
@@ -128,7 +142,8 @@ function horseElapsed(result, horseIdx) {
             <template v-else-if="round.active">
               <div class="card-heading">{{ round.heading }}</div>
               <div class="pending-state">
-                Race is in progress. Finishers will appear here as they complete the round.
+                Race is in progress. Finishers will appear here as they complete
+                the round.
               </div>
             </template>
 
@@ -189,7 +204,11 @@ function horseElapsed(result, horseIdx) {
 }
 
 .schedule-card {
-  background: color-mix(in srgb, var(--color-bg-dominant) 86%, var(--color-accent) 14%);
+  background: color-mix(
+    in srgb,
+    var(--color-bg-dominant) 86%,
+    var(--color-accent) 14%
+  );
 }
 
 .result-card {

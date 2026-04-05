@@ -60,10 +60,15 @@ const hasSchedule = computed(() => !!visibleRound.value)
   <div data-testid="race-track" class="race-track">
     <template v-if="hasSchedule">
       <div class="round-header" data-testid="round-header">
-        Round {{ visibleRound.roundNumber }} &#8212; {{ visibleRound.distance }}m
+        Round {{ visibleRound.roundNumber }} &#8212;
+        {{ visibleRound.distance }}m
       </div>
       <div class="track-container">
-        <div v-if="countdown > 0" class="countdown-overlay" data-testid="round-countdown">
+        <div
+          v-if="countdown > 0"
+          class="countdown-overlay"
+          data-testid="round-countdown"
+        >
           <span class="countdown-value">{{ countdown }}</span>
         </div>
         <div
@@ -87,9 +92,13 @@ const hasSchedule = computed(() => !!visibleRound.value)
               <span class="marker-name">{{ horse.name }}</span>
               <span
                 class="marker-icon"
-                :class="{ 'marker-icon-running': gamePhase === 'RACING' && (positions[horse.idx] ?? 0) < 1 }"
+                :class="{
+                  'marker-icon-running':
+                    gamePhase === 'RACING' && (positions[horse.idx] ?? 0) < 1,
+                }"
                 aria-hidden="true"
-              >&#128014;</span>
+                >&#128014;</span
+              >
             </div>
           </div>
         </div>
@@ -110,7 +119,11 @@ const hasSchedule = computed(() => !!visibleRound.value)
   display: flex;
   flex-direction: column;
   background:
-    linear-gradient(180deg, rgba(255,255,255,0.04), rgba(255,255,255,0) 80px),
+    linear-gradient(
+      180deg,
+      rgba(255, 255, 255, 0.04),
+      rgba(255, 255, 255, 0) 80px
+    ),
     linear-gradient(180deg, #254f2f 0%, #183922 100%);
 }
 
@@ -144,22 +157,33 @@ const hasSchedule = computed(() => !!visibleRound.value)
 
 .lane-odd {
   background:
-    linear-gradient(180deg, rgba(255,255,255,0.04), rgba(255,255,255,0)),
-    linear-gradient(90deg, rgba(255,255,255,0.05) 0 2px, transparent 2px 100%);
+    linear-gradient(180deg, rgba(255, 255, 255, 0.04), rgba(255, 255, 255, 0)),
+    linear-gradient(
+      90deg,
+      rgba(255, 255, 255, 0.05) 0 2px,
+      transparent 2px 100%
+    );
 }
 
 .lane-even {
   background:
-    linear-gradient(180deg, rgba(0,0,0,0.08), rgba(255,255,255,0.02)),
-    linear-gradient(90deg, rgba(255,255,255,0.05) 0 2px, transparent 2px 100%);
+    linear-gradient(180deg, rgba(0, 0, 0, 0.08), rgba(255, 255, 255, 0.02)),
+    linear-gradient(
+      90deg,
+      rgba(255, 255, 255, 0.05) 0 2px,
+      transparent 2px 100%
+    );
 }
 
 .track-area {
   flex: 1;
   position: relative;
   overflow: hidden;
-  background-image:
-    linear-gradient(90deg, rgba(255,255,255,0.07) 0 2px, transparent 2px 12%);
+  background-image: linear-gradient(
+    90deg,
+    rgba(255, 255, 255, 0.07) 0 2px,
+    transparent 2px 12%
+  );
   background-size: 72px 100%;
 }
 
@@ -169,12 +193,11 @@ const hasSchedule = computed(() => !!visibleRound.value)
   top: 0;
   bottom: 0;
   width: 8px;
-  background:
-    repeating-linear-gradient(
-      180deg,
-      #f6f2dd 0 10px,
-      #2d2d2d 10px 20px
-    );
+  background: repeating-linear-gradient(
+    180deg,
+    #f6f2dd 0 10px,
+    #2d2d2d 10px 20px
+  );
   box-shadow: -2px 0 0 rgba(255, 255, 255, 0.22);
   display: flex;
   align-items: center;

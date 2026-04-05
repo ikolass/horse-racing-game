@@ -35,7 +35,8 @@ const schedule = {
   },
   getters: {
     allRounds: (state) => state.rounds,
-    roundByNumber: (state) => (num) => state.rounds.find((round) => round.roundNumber === num),
+    roundByNumber: (state) => (num) =>
+      state.rounds.find((round) => round.roundNumber === num),
   },
 }
 

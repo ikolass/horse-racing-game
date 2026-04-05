@@ -1,6 +1,8 @@
 import { expect, test } from '@playwright/test'
 
-test('completes the full game flow and renders six result rounds', async ({ page }) => {
+test('completes the full game flow and renders six result rounds', async ({
+  page,
+}) => {
   await page.goto('/?e2e=1')
 
   const generateButton = page.locator('[data-testid="btn-generate"]')
@@ -13,7 +15,9 @@ test('completes the full game flow and renders six result rounds', async ({ page
   await startButton.click()
 
   for (let round = 1; round <= 6; round += 1) {
-    await expect(page.locator(`[data-testid="result-round-${round}"]`)).toBeVisible({
+    await expect(
+      page.locator(`[data-testid="result-round-${round}"]`)
+    ).toBeVisible({
       timeout: 60000,
     })
   }
@@ -23,6 +27,8 @@ test('completes the full game flow and renders six result rounds', async ({ page
   await expect(resultCards).toHaveCount(6)
 
   for (let round = 1; round <= 6; round += 1) {
-    await expect(page.locator(`[data-testid="result-round-${round}"]`)).toBeVisible()
+    await expect(
+      page.locator(`[data-testid="result-round-${round}"]`)
+    ).toBeVisible()
   }
 })

@@ -21,7 +21,8 @@ const results = {
   },
   getters: {
     allResults: (state) => state.rounds,
-    resultByRound: (state) => (num) => state.rounds.find((round) => round.roundNumber === num),
+    resultByRound: (state) => (num) =>
+      state.rounds.find((round) => round.roundNumber === num),
   },
 }
 

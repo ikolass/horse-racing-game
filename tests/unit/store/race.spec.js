@@ -68,25 +68,60 @@ describe('race module mutations', () => {
 
 describe('race module getters', () => {
   it('isRoundActive is true only when countdown is over and race is active', () => {
-    expect(race.getters.isRoundActive({ gamePhase: 'RACING', countdown: 0 })).toBe(true)
-    expect(race.getters.isRoundActive({ gamePhase: 'ROUND_COMPLETE', countdown: 0 })).toBe(true)
-    expect(race.getters.isRoundActive({ gamePhase: 'RACING', countdown: 2 })).toBe(false)
-    expect(race.getters.isRoundActive({ gamePhase: 'SCHEDULED', countdown: 0 })).toBe(false)
+    expect(
+      race.getters.isRoundActive({ gamePhase: 'RACING', countdown: 0 })
+    ).toBe(true)
+    expect(
+      race.getters.isRoundActive({ gamePhase: 'ROUND_COMPLETE', countdown: 0 })
+    ).toBe(true)
+    expect(
+      race.getters.isRoundActive({ gamePhase: 'RACING', countdown: 2 })
+    ).toBe(false)
+    expect(
+      race.getters.isRoundActive({ gamePhase: 'SCHEDULED', countdown: 0 })
+    ).toBe(false)
   })
 
   it('canGenerateSchedule blocks only during an active round or countdown', () => {
-    expect(race.getters.canGenerateSchedule({ countdown: 0 }, { isRoundActive: false })).toBe(true)
-    expect(race.getters.canGenerateSchedule({ countdown: 0 }, { isRoundActive: true })).toBe(false)
-    expect(race.getters.canGenerateSchedule({ countdown: 2 }, { isRoundActive: false })).toBe(false)
+    expect(
+      race.getters.canGenerateSchedule(
+        { countdown: 0 },
+        { isRoundActive: false }
+      )
+    ).toBe(true)
+    expect(
+      race.getters.canGenerateSchedule(
+        { countdown: 0 },
+        { isRoundActive: true }
+      )
+    ).toBe(false)
+    expect(
+      race.getters.canGenerateSchedule(
+        { countdown: 2 },
+        { isRoundActive: false }
+      )
+    ).toBe(false)
   })
 
   it('canStartRace allows only scheduled idle-between-round states without countdown', () => {
-    expect(race.getters.canStartRace({ gamePhase: 'SCHEDULED', countdown: 0 })).toBe(true)
-    expect(race.getters.canStartRace({ gamePhase: 'IDLE', countdown: 0 })).toBe(false)
-    expect(race.getters.canStartRace({ gamePhase: 'DONE', countdown: 0 })).toBe(false)
-    expect(race.getters.canStartRace({ gamePhase: 'RACING', countdown: 0 })).toBe(false)
-    expect(race.getters.canStartRace({ gamePhase: 'ROUND_COMPLETE', countdown: 0 })).toBe(false)
-    expect(race.getters.canStartRace({ gamePhase: 'SCHEDULED', countdown: 1 })).toBe(false)
+    expect(
+      race.getters.canStartRace({ gamePhase: 'SCHEDULED', countdown: 0 })
+    ).toBe(true)
+    expect(race.getters.canStartRace({ gamePhase: 'IDLE', countdown: 0 })).toBe(
+      false
+    )
+    expect(race.getters.canStartRace({ gamePhase: 'DONE', countdown: 0 })).toBe(
+      false
+    )
+    expect(
+      race.getters.canStartRace({ gamePhase: 'RACING', countdown: 0 })
+    ).toBe(false)
+    expect(
+      race.getters.canStartRace({ gamePhase: 'ROUND_COMPLETE', countdown: 0 })
+    ).toBe(false)
+    expect(
+      race.getters.canStartRace({ gamePhase: 'SCHEDULED', countdown: 1 })
+    ).toBe(false)
   })
 })
 
@@ -151,7 +186,10 @@ describe('race module actions', () => {
 
     race.actions.startRoundCountdown({ commit, dispatch }, 2)
 
-    expect(commit).toHaveBeenCalledWith('SET_COUNTDOWN', GAME_CONFIG.COUNTDOWN_SECONDS)
+    expect(commit).toHaveBeenCalledWith(
+      'SET_COUNTDOWN',
+      GAME_CONFIG.COUNTDOWN_SECONDS
+    )
 
     vi.advanceTimersByTime(GAME_CONFIG.COUNTDOWN_TICK_MS)
     expect(commit).toHaveBeenCalledWith('SET_COUNTDOWN', 2)
@@ -185,7 +223,10 @@ describe('race module actions', () => {
     }
     const horseIndices = [0, 8]
 
-    race.actions.runRound({ commit, state, rootState, dispatch }, { horseIndices })
+    race.actions.runRound(
+      { commit, state, rootState, dispatch },
+      { horseIndices }
+    )
 
     expect(commit).toHaveBeenCalledWith('SET_POSITIONS', { 0: 0, 8: 0 })
     expect(commit).toHaveBeenCalledWith('SET_ROUND_STARTED_AT', 1000)
@@ -222,9 +263,19 @@ describe('race module actions', () => {
       'schedule/roundByNumber': vi.fn(() => round),
     }
 
-    race.actions.onRoundComplete({ commit, state, dispatch, rootState, rootGetters })
+    race.actions.onRoundComplete({
+      commit,
+      state,
+      dispatch,
+      rootState,
+      rootGetters,
+    })
 
-    expect(dispatch).toHaveBeenNthCalledWith(1, 'transitionTo', 'ROUND_COMPLETE')
+    expect(dispatch).toHaveBeenNthCalledWith(
+      1,
+      'transitionTo',
+      'ROUND_COMPLETE'
+    )
     expect(dispatch).toHaveBeenNthCalledWith(
       2,
       'results/addRoundResult',
@@ -235,7 +286,7 @@ describe('race module actions', () => {
         elapsedMs: 2200,
         finishTimes: { 8: 1400, 1: 1800, 4: 2200 },
       },
-      { root: true },
+      { root: true }
     )
 
     vi.advanceTimersByTime(GAME_CONFIG.PAUSE_BETWEEN_ROUNDS_MS)
@@ -269,13 +320,22 @@ describe('race module actions', () => {
       'schedule/roundByNumber': vi.fn(() => round),
     }
 
-    race.actions.onRoundComplete({ commit, state, dispatch, rootState, rootGetters })
+    race.actions.onRoundComplete({
+      commit,
+      state,
+      dispatch,
+      rootState,
+      rootGetters,
+    })
     vi.advanceTimersByTime(GAME_CONFIG.PAUSE_BETWEEN_ROUNDS_MS)
 
     expect(commit).toHaveBeenCalledWith('SET_ROUND_STARTED_AT', null)
     expect(commit).toHaveBeenCalledWith('SET_ROUND_FINISH_TIMES', {})
     expect(dispatch).toHaveBeenCalledWith('transitionTo', 'DONE')
-    expect(dispatch).not.toHaveBeenCalledWith('startRoundCountdown', expect.anything())
+    expect(dispatch).not.toHaveBeenCalledWith(
+      'startRoundCountdown',
+      expect.anything()
+    )
   })
 
   it('startRoundByNumber dispatches runRound for the requested round', () => {
@@ -288,6 +348,8 @@ describe('race module actions', () => {
     race.actions.startRoundByNumber({ dispatch, rootGetters }, 3)
 
     expect(rootGetters['schedule/roundByNumber']).toHaveBeenCalledWith(3)
-    expect(dispatch).toHaveBeenCalledWith('runRound', { horseIndices: [2, 3, 4] })
+    expect(dispatch).toHaveBeenCalledWith('runRound', {
+      horseIndices: [2, 3, 4],
+    })
   })
 })

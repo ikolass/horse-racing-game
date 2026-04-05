@@ -32,7 +32,9 @@ describe('schedule module', () => {
     const generatedRounds = commit.mock.calls[0][1]
 
     expect(generatedRounds).toHaveLength(6)
-    expect(generatedRounds.map((round) => round.distance)).toEqual([1200, 1400, 1600, 1800, 2000, 2200])
+    expect(generatedRounds.map((round) => round.distance)).toEqual([
+      1200, 1400, 1600, 1800, 2000, 2200,
+    ])
 
     generatedRounds.forEach((round, index) => {
       expect(round.roundNumber).toBe(index + 1)

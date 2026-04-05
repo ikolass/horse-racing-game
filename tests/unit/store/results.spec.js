@@ -18,13 +18,15 @@ describe('results module', () => {
 
   it('CLEAR_RESULTS resets rounds to an empty array', () => {
     const state = results.state()
-    state.rounds = [{
-      roundNumber: 1,
-      distance: 1200,
-      finishOrder: [1, 2, 3],
-      elapsedMs: 2100,
-      finishTimes: { 1: 1200, 2: 1600, 3: 2100 },
-    }]
+    state.rounds = [
+      {
+        roundNumber: 1,
+        distance: 1200,
+        finishOrder: [1, 2, 3],
+        elapsedMs: 2100,
+        finishTimes: { 1: 1200, 2: 1600, 3: 2100 },
+      },
+    ]
 
     results.mutations.CLEAR_RESULTS(state)
 

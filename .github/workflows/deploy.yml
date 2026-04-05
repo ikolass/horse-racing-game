@@ -1,0 +1,42 @@
+name: Deploy Placeholder
+
+on:
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    environment: production
+    timeout-minutes: 15
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 20
+          cache: npm
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Build app
+        run: npm run build
+
+      - name: Prepare deploy artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: deploy-dist
+          path: dist
+          if-no-files-found: error
+
+      - name: Deployment placeholder
+        run: |
+          echo "Automatic deployment is intentionally disabled."
+          echo "Use this workflow only when you decide to deploy to a real target."
+          echo "For now, run the app locally and expose it with a tunnel such as ngrok or cloudflared."
