@@ -34,4 +34,29 @@ import ResultsPanel from './components/ResultsPanel.vue'
 .col-track {
   border-right: 1px solid var(--color-divider);
 }
+
+@media (max-width: 1100px) {
+  .col {
+    height: auto;
+    min-height: 0;
+  }
+
+  .col-roster,
+  .col-track {
+    border-right: none;
+    border-bottom: 1px solid var(--color-divider);
+  }
+
+  .col-roster {
+    overflow: visible;
+  }
+
+  .col-track {
+    min-height: 320px;
+  }
+
+  .col-results {
+    min-height: 50vh;
+  }
+}
 </style>

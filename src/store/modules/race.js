@@ -185,8 +185,8 @@ const race = {
             rootState.horses.list[a].condition
         )
         const elapsedMs = Math.max(
-          0,
-          Date.now() - (state.roundStartedAt ?? Date.now())
+          ...Object.values(state.roundFinishTimes),
+          0
         )
         dispatch(
           'results/addRoundResult',
