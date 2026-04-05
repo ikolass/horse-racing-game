@@ -14,7 +14,9 @@
     "test": "vitest run",
     "test:watch": "vitest",
     "test:run": "vitest run",
-    "test:e2e": "playwright test"
+    "test:e2e": "playwright test",
+    "test:visual": "playwright test tests/e2e/visual.spec.js",
+    "test:visual:update": "playwright test tests/e2e/visual.spec.js --update-snapshots"
   },
   "dependencies": {
     "vue": "^3.5.30",

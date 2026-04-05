@@ -1,8 +1,30 @@
 import { expect, test } from '@playwright/test'
 
+function seedRandom(seed) {
+  let state = seed >>> 0
+
+  return () => {
+    state = (state * 1664525 + 1013904223) >>> 0
+    return state / 4294967296
+  }
+}
+
 test('completes the full game flow and renders six result rounds', async ({
   page,
 }) => {
+  await page.addInitScript(({ seed }) => {
+    const random = (() => {
+      let state = seed >>> 0
+
+      return () => {
+        state = (state * 1664525 + 1013904223) >>> 0
+        return state / 4294967296
+      }
+    })()
+
+    Math.random = random
+  }, { seed: 123456 })
+
   await page.goto('/?e2e=1')
 
   const generateButton = page.locator('[data-testid="btn-generate"]')
@@ -31,4 +53,34 @@ test('completes the full game flow and renders six result rounds', async ({
       page.locator(`[data-testid="result-round-${round}"]`)
     ).toBeVisible()
   }
+})
+
+test('clears previous round finish labels when the next round starts', async ({
+  page,
+}) => {
+  await page.addInitScript(({ seed }) => {
+    const random = (() => {
+      let state = seed >>> 0
+
+      return () => {
+        state = (state * 1664525 + 1013904223) >>> 0
+        return state / 4294967296
+      }
+    })()
+
+    Math.random = random
+  }, { seed: 123456 })
+
+  await page.goto('/?e2e=1')
+  await page.getByTestId('btn-generate').click()
+  await page.getByTestId('btn-start').click()
+
+  await expect(page.getByTestId('result-round-1')).toContainText('Finished', {
+    timeout: 60000,
+  })
+  await expect(page.getByTestId('round-header')).toContainText('Round 2')
+
+  const finishLabels = page.locator('.finish-position')
+
+  await expect(finishLabels).toHaveCount(0)
 })

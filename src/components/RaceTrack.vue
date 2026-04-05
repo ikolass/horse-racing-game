@@ -48,6 +48,10 @@ watch(gamePhase, (phase) => {
   if (phase === 'RACING') liveFinishOrder.value = []
 })
 
+watch(currentRound, () => {
+  liveFinishOrder.value = []
+})
+
 function finishPosition(horseIdx) {
   const pos = liveFinishOrder.value.indexOf(horseIdx)
   return pos === -1 ? null : pos + 1

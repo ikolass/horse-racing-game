@@ -36,3 +36,25 @@ npm run dev
 ```sh
 npm run build
 ```
+
+### End-to-End Tests
+
+```sh
+npm run test:e2e
+```
+
+### Visual Regression Tests
+
+Baseline snapshot'lari ilk kez olusturmak veya guncellemek icin:
+
+```sh
+npm run test:visual:update
+```
+
+Mevcut ekrani baseline ile karsilastirmak icin:
+
+```sh
+npm run test:visual
+```
+
+Not: Visual test, `Math.random` degerini seed'leyerek schedule uretimini kararlastirir. Bu sayede snapshot farklari sadece gercek UI degisikliklerinden gelir.
